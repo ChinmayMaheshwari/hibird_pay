@@ -27,8 +27,7 @@ SECRET_KEY = '4t4=fkcm3!+62k1b!h@#rza+_cj^77&6-ib3^re5sqghr0x33@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1','hybird.herokuapp.com']
 
 # Application definition
 
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userpay',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'wipay.urls'
@@ -132,6 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
@@ -144,3 +146,8 @@ EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = "profile"
 LOGOUT_REDIRECT_URL = "profile"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
