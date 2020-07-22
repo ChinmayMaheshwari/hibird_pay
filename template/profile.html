@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<style type="text/css">
+  body {
+  background-image: url('/static/logo/hybird_background.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 60% 60%;
+  background-position: center bottom;
+}
+</style>
+<body>
+<div class="card" style="margin:50px">
+  <div class="card-header">
+    User Details
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>Name: {{user.first_name}} {{user.last_name}}</p>
+      <p>Email: {{user.email}}</p>
+      <p>Customer Id: {{user.username}} </p>
+      <p>Mobile No: {{profile.mobile_no}}</p>
+      <footer class="blockquote-footer">Our Valueable Customer From <cite title="Source Title">{{user.date_joined}}</cite></footer>
+    </blockquote>
+  </div>
+</div>
+
+<div class="card mx-auto" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{profile.current_plan}}</h5>
+    {% if paid %}
+    <h6 class="card-subtitle mb-2 text-muted">{{profile.plan_amount}} ₹</h6>
+    <p class="card-text">Your Payment is Due for the month of July Please Pay Now To Continue Your Serives.</p>
+    <a href="{% url 'payment' %}" class="card-link">Pay Now</a>
+    {% else %}
+    <h6 class="card-subtitle mb-2 text-muted"> Paid </h6>
+    <p class="card-text">You Have Already Paid For this Month.</p>
+    {% endif %}
+    
+  </div>
+</div>
+</body>
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    {% block content %}
+    <div align="center">
+
+        <h2 style="margin:50px">Please Check Your Customer Id : {{user.user.username}}</h2>
+
+    <h3 style="margin:50px">Amount to be paid: {{user.plan_amount}}</h3>
+    <p style="margin:10px">Please Do Not Refresh This Page</p>
+        
+    <div>
+    <form action="/payment/" method="POST"> 
+    {%csrf_token%}
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key={{key}} 
+    data-amount={{amount}} 
+    data-currency="INR"
+    data-order_id={{order}}
+    data-buttontext="Pay with Razorpay"
+    data-name="HiBird"
+    data-description="Test transaction"
+    data-image="/static/logo/hibird_logo.png"
+    data-prefill.name={{user.user.first_name}}
+    data-prefill.email={{user.user.email}}
+    data-prefill.contact={{user.mobile_no}}
+    data-theme.color="#F37254"
+></script>
+<input type="hidden" custom="Hidden Element" name="hidden">
+<input type="hidden" value="{{transaction.id}}" name="tran">
+</form>
+    </div>
+    </div>
+    
+{% endblock content %}
+</body>
