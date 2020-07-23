@@ -5,6 +5,48 @@ import razorpay
 from datetime import datetime
 
 # Create your views here.
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+class PersonalInfoView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+    	user = request.user
+    	try:
+    		profile = Profile.objects.get(user=user)
+    	except:
+    		return Response({'detail':'Not a Valid User'})
+    	content = {
+        'username': user.username,  
+        'first_name': user.first_name,  
+    	'last_name': user.last_name,  
+    	'email': user.email,  
+    	'mobile_no': profile.mobile_no,  
+    	'current_plan':profile.current_plan
+    	}
+    	return Response(content)
+
+class PaymentInfoView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+    	user = request.user
+    	
+    	try:
+    		transaction = TransactionDetail.objects.filter(user=user).order_by('-date')
+    		last_payment = transaction.first()
+    		if last_payment:
+    			if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
+    				return Response({'status':'true','amount':0})
+    	except:
+    		return Response({'detail':'Not a Valid User'})
+    	content = {
+         'status':'false', 
+    	'amount':profile.plan_amount
+    	}
+    	return Response(content)
 
 
 def index(request):

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import TemplateView
 from userpay import views
+from rest_framework.authtoken.views import obtain_auth_token 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,8 @@ urlpatterns = [
     path('profile/',views.profile,name='profile'),
     path('payment/',views.payment,name='payment'),
     path('',include("django.contrib.auth.urls")),
+    path('api/token/', obtain_auth_token, name='api_token_auth'),
+    path('api/profile/', views.PersonalInfoView.as_view(), name='profile'),
+    path('api/payment/', views.PaymentInfoView.as_view(), name='payment'),
+       
 ]
