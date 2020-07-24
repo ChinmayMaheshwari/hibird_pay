@@ -27,7 +27,7 @@ urlpatterns = [
     path('payment/',views.payment,name='payment'),
     path('',include("django.contrib.auth.urls")),
     path('api/token/', obtain_auth_token, name='api_token_auth'),
-    path('api/profile/', views.PersonalInfoView.as_view(), name='profile'),
-    path('api/payment/', views.PaymentInfoView.as_view(), name='payment'),
+    path('api/profile/', views.PersonalInfoView.as_view(), name='api_profile'),
+    path('api/payment/', views.PaymentInfoView.as_view(), name='api_payment'),
        
 ]

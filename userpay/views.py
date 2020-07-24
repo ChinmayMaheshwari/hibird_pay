@@ -42,8 +42,9 @@ class PaymentInfoView(APIView):
     				return Response({'status':'true','amount':0})
     	except:
     		return Response({'detail':'Not a Valid User'})
+    	profile = Profile.objects.get(user=user)
     	content = {
-         'status':'false', 
+        'status':'false', 
     	'amount':profile.plan_amount
     	}
     	return Response(content)
