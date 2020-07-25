@@ -29,5 +29,6 @@ urlpatterns = [
     path('api/token/', obtain_auth_token, name='api_token_auth'),
     path('api/profile/', views.PersonalInfoView.as_view(), name='api_profile'),
     path('api/payment/', views.PaymentInfoView.as_view(), name='api_payment'),
+    path('api/transaction/',views.TransactionView.as_view({'get': 'list'}),name='transaction'),
        
 ]
