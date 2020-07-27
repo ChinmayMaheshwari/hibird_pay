@@ -5,8 +5,8 @@
 <head>
   <title>HiBird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{% static "base.css" %}">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -20,46 +20,40 @@ footer {
 
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light" style='background-color: #e3f2fe;'> 
-   <a class="navbar-brand" style="position: absolute;
-    left: 50%;
-    margin-left: -50px !important;  /* 50% of your logo width */
-    display: block;" href="/">
-    <img src="{% static 'logo/hibird_logo.png'%}" width="100" height="100" alt="">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+   <header>
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <div class="container">
+                <img src="{% static "logo/bird.png" %}" style="height: 40px;" alt="">
+                <a class="navbar-brand" href="{% url 'index' %}">Hi-Bird</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/about/">About</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#footer_section">Contact Us</a>
-      </li>
-    </ul>
-        <ul class="navbar-nav" style="padding:5px;">
-          {% if user.is_authenticated %}
-          <li class="nav-item active">
-            <a class="nav-link" href="/profile/">Profile</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/logout/">Logout</a>
-          </li>
-          {% else %}
-          <li class="nav-item active">
-            <a class="nav-link" href="/login/">Login</a>
-          </li>
-          {% endif %}  
-        </ul>
-                 
-  </div>
-</nav>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" style="color: white; margin-right: 30px;" href="{% url 'index' %}">Home</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white; margin-right: 40px;" href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white; margin-right: 40px;" href="{% url 'about' %}">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white; margin-right: 40px;" href="#">Help</a>
+                        </li>
+                        <ul class="navbar-nav ml-auto">
+                            <a href="{% url 'login' %}"><button type="button" style="margin-left: 150px;" class="btn btn-danger">Login</button></a>
+                        </ul>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
    {% block content %}{% endblock content %}
 
 

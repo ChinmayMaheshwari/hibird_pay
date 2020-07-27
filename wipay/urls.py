@@ -30,5 +30,7 @@ urlpatterns = [
     path('api/profile/', views.PersonalInfoView.as_view(), name='api_profile'),
     path('api/payment/', views.PaymentInfoView.as_view(), name='api_payment'),
     path('api/transaction/',views.TransactionView.as_view({'get': 'list'}),name='transaction'),
-       
+    path('api/slider/',views.SliderView.as_view({'get': 'list'}),name='slider'),
+    path('api/plandetail/',views.PlanView.as_view({'get': 'list'}),name='plandetail'),
+             
 ]

@@ -12,6 +12,17 @@ from rest_framework import viewsets
 from .serializers import *
 
 
+class SliderView(viewsets.ModelViewSet):
+	queryset = Slider.objects.all()
+	serializer_class = SliderSerializer
+	http_method_names = ['get']	
+
+class PlanView(viewsets.ModelViewSet):
+	queryset = PlanDetail.objects.all()
+	serializer_class = PlanSerializer
+	http_method_names = ['get']	
+
+
 class TransactionView(viewsets.ModelViewSet):
 	queryset = TransactionDetail.objects.all()
 	serializer_class = TransactionDetailSerializer
@@ -86,9 +97,9 @@ class PaymentInfoView(APIView):
 			client.utility.verify_payment_signature({'razorpay_order_id':transaction.order_id,'razorpay_payment_id':request.data.get('razorpay_payment_id'),'razorpay_signature':request.data.get('razorpay_signature')})
 			transaction.success	=True
 			transaction.save()
-			return Response({'transaction':'Transaction Success'})
+			return Response({'transaction':True})
 		except:
-			return Response({'transaction':'Transaction Failed'})
+			return Response({'transaction':False})
 
 def index(request):
 	return render(request,'index.html')

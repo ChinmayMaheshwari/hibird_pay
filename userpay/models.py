@@ -55,3 +55,13 @@ class TransactionDetail(models.Model):
 # 		instance = kwargs.get('instance')
 # 		instance.username = 'Hybrid'+str(instance.id)
 # 		instance.save()
+
+class PlanDetail(models.Model):
+	title = models.CharField(max_length=50)
+	amount = models.PositiveIntegerField()
+	description = models.TextField()
+
+class Slider(models.Model):
+	title = models.CharField(max_length=50)
+	photo = models.FileField(upload_to='slider/')
+	
