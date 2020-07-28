@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import TemplateView
+from django.conf.urls.static import static
 from userpay import views
 from rest_framework.authtoken.views import obtain_auth_token 
 
@@ -31,6 +32,5 @@ urlpatterns = [
     path('api/payment/', views.PaymentInfoView.as_view(), name='api_payment'),
     path('api/transaction/',views.TransactionView.as_view({'get': 'list'}),name='transaction'),
     path('api/slider/',views.SliderView.as_view({'get': 'list'}),name='slider'),
-    path('api/plandetail/',views.PlanView.as_view({'get': 'list'}),name='plandetail'),
-             
-]
+    path('api/plandetail/',views.PlanView.as_view({'get': 'list'}),name='plandetail'),             
+] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
