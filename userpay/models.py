@@ -60,8 +60,14 @@ class PlanDetail(models.Model):
 	title = models.CharField(max_length=50)
 	amount = models.PositiveIntegerField()
 	description = models.TextField()
+	photo = models.FileField(null=True,blank=True,upload_to='plan/')
+
+	def __str__(self):
+		return self.title
 
 class Slider(models.Model):
 	title = models.CharField(max_length=50)
 	photo = models.FileField(upload_to='slider/')
-	
+
+	def __str__(self):
+		return self.title

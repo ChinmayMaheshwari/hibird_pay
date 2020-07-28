@@ -88,6 +88,7 @@ class PaymentInfoView(APIView):
     	}
 		return Response(content)
 	def post(self,request):
+		print(request.data)
 		id_of_transaction = int(request.data.get('id'))
 		transaction = TransactionDetail.objects.get(id=id_of_transaction)
 		transaction.date=datetime.now()
