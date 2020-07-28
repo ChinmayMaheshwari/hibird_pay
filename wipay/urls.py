@@ -18,6 +18,7 @@ from django.urls import path,include
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from userpay import views
+from .import settings
 from rest_framework.authtoken.views import obtain_auth_token 
 
 urlpatterns = [
