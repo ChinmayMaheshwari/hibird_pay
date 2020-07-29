@@ -4,7 +4,7 @@ from .models import *
 class TransactionDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = TransactionDetail
-        fields = ['order_id','payment_id','date','payment_month','success',]
+        fields = ['order_id','payment_id','date','success',]
 
 class PlanSerializer(serializers.ModelSerializer):
 	class Meta:
