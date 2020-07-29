@@ -2,44 +2,124 @@
 
 
 {% block content %}
-<style type="text/css">
-  body {
-  background-image: url('/static/logo/hybird_background.jpeg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 60% 60%;
-  background-position: center bottom;
-}
-</style>
-<body>
-<div class="card" style="margin:50px">
-  <div class="card-header">
-    User Details
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>Name: {{user.first_name}} {{user.last_name}}</p>
-      <p>Email: {{user.email}}</p>
-      <p>Customer Id: {{user.username}} </p>
-      <p>Mobile No: {{profile.mobile_no}}</p>
-      <footer class="blockquote-footer">Our Valueable Customer From <cite title="Source Title">{{user.date_joined}}</cite></footer>
-    </blockquote>
-  </div>
-</div>
+<div class="container emp-profile mt-5">
+            <form method="get" action="/payment/">
+                <div class="row mt-4">
+                    <div class="col-lg-4">
+                        <div class="profile-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                            <!-- <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{user.first_name}} {{user.last_name}}                                    </h5>
+                                    <p class="proile-rating">{{profile.current_plan}}</p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Customer Id</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.username}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.first_name}} {{user.last_name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.email}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{profile.mobile_no}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Join Date</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.date_joined}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Plan</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{profile.current_plan}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Monthly Rate</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{profile.plan_amount}} ₹</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Due Date</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{profile.due_date}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Availability</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{available}} days</p>
+                                            </div>
+                                        </div>
+                                        {% csrf_token %}
+                                        <a href="/payment/"><button>Pay Now</button></a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
 
-<div class="card mx-auto" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{profile.current_plan}}</h5>
-    {% if paid %}
-    <h6 class="card-subtitle mb-2 text-muted">{{profile.plan_amount}} ₹</h6>
-    <p class="card-text">Your Payment is Due for the month of July Please Pay Now To Continue Your Serives.</p>
-    <a href="{% url 'payment' %}" class="card-link">Pay Now</a>
-    {% else %}
-    <h6 class="card-subtitle mb-2 text-muted"> Paid </h6>
-    <p class="card-text">You Have Already Paid For this Month.</p>
-    {% endif %}
-    
-  </div>
-</div>
-</body>
 {% endblock content %}

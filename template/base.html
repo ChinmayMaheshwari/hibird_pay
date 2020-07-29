@@ -4,95 +4,240 @@
 <html>
 <head>
   <title>HiBird</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-     <link rel="stylesheet" href="{% static "base.css" %}">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<style>
-footer {
+
+
+<!-- including some utilities -->
+  <!-- For responsive design  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap css  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <!-- bootstrap javascript and other scripts with different utility purpose -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/9deee08fd3.js" crossorigin="anonymous"></script>
+
+
+<!-- <style> -->
+<!-- /*footer {
     margin-top: 50px;
     padding: 5px;
 }
+*/ -->
 
+<style>
+  
+  *{
+    padding: 0px;
+    margin: 0px;
+  }
+
+  
+
+  .try{
+      background: linear-gradient(45deg, #29bae4 0%, #ee76ad 100%);
+      background-color: rgba(0, 0, 0, 0);
+      background-position-x: 0%;
+      background-position-y: 0%;
+      background-repeat: repeat;
+      background-attachment: scroll;
+      background-image: linear-gradient(45deg, rgb(42, 187, 229) 0%, rgb(238, 118, 173) 100%);
+      background-size: auto;
+      background-origin: padding-box;
+      background-clip: border-box;
+    }
+
+    
 </style>
 
 </head>
 <body>
-   <header>
-        <nav class="navbar navbar-expand-lg navbar-custom">
-            <div class="container">
-                <img src="{% static "logo/bird.png" %}" style="height: 40px;" alt="">
-                <a class="navbar-brand" href="{% url 'index' %}">Hi-Bird</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" style="color: white; margin-right: 30px;" href="{% url 'index' %}">Home</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white; margin-right: 40px;" href="{% url 'about' %}">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white; margin-right: 40px;" href="{% url 'about' %}">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white; margin-right: 40px;" href="#">Help</a>
-                        </li>
-                        <ul class="navbar-nav ml-auto">
-                            <a href="{% url 'login' %}"><button type="button" style="margin-left: 150px;" class="btn btn-danger">Login</button></a>
-                        </ul>
-                    </ul>
 
-                </div>
-            </div>
-        </nav>
-    </header>
+<div class="container-fluid">
+
+<!-- navbar start from here  -->
+<nav class="navbar navbar-expand-lg navbar-light " >
+<a class="navbar-brand" href="{{'/'}}">
+  <img src="{% static 'logo/hibird_logo.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+  <span class=" font-weight-bold" style="font-size: 1.2em;">HiBird</span>
+</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/about/">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#footer_section">Contact US</a>
+    </li>
+    
+    
+  </ul>
+  <form class="form-inline my-2 my-lg-0">
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="/login/">Login</a>
+    </li> -->
+    <ul class="navbar-nav" style="padding:5px;">
+          {% if user.is_authenticated %}
+          <li class="nav-item active" >
+            <a class="btn btn-dark my-2 my-sm-0 ml-2" href="/profile/">Profile</a>
+          </li>
+          <!-- <a href="/profile/"><button type="button" class="btn btn-dark my-2 my-sm-0 ml-1" >Profile</button></a> -->
+          <!-- <li class="nav-item active">
+            <a class="nav-link btn" href="/logout/">Logout</a>
+          </li> -->
+          <li>
+          <a href="/logout/"><button type="button" class="btn btn-dark my-2 my-sm-0 ml-2" >Logout</button></a>
+          </li>
+          {% else %}
+          <li>
+          <a href="/login/"><button type="button" class="btn btn-dark my-2 my-sm-0 " >Login</button></a></li>
+          {% endif %}  
+        </ul>
+  </form>
+</div>
+</nav>
+<!-- navbar end here -->
+
+
+
+
    {% block content %}{% endblock content %}
 
-
-    <footer id='footer_section' style="background-color:#e3f2fe;" role="contentinfo">
+<!-- Footer -->
+  <footer class="page-footer font-small ligh-darkten-5 mt-5 " style="background: #eeeeee; "id="footer">
+    
+    <!-- old one is commented for its background color -->
+    <!-- <div style="background-color: #21d192;"> -->
+    <div class="try">
       <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-4 mb-5">
-            <h3>About Us</h3>
-            <p class="mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elitLorem ipsum, dolor sit amet consectetur adipisicing elit</p>
-            <ul class="list-unstyled footer-link d-flex footer-social">
-              <li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-linkedin"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
-            </ul>
+
+        <!-- Grid row-->
+        <div class="row py-4 d-flex align-items-center">
+
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+            <h6 class="mb-0">Get connected with us on social networks!</h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+            <!-- Facebook -->
+            <a class="fb-ic" href="https://www.facebook.com/">
+              <i class="fab fa-facebook white-text mr-4" style="color:black;"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic">
+              <i class="fab fa-twitter white-text mr-4"> </i>
+            </a>
+            <!-- Google +-->
+            <a class="gplus-ic">
+              <i class="fab fa-google-plus-g white-text mr-4"> </i>
+            </a>
+            <!--Linkedin -->
+            <a class="li-ic">
+              <i class="fab fa-linkedin-in white-text mr-4"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic">
+              <i class="fab fa-instagram white-text"> </i>
+            </a>
 
           </div>
-          <div class="col-md-5 mb-5 pl-md-5">
-            <h3>Contact Info</h3>
-            <ul class="list-unstyled footer-link">
-              <li class="d-block">
-                <span class="d-block">Address:</span>
-                <span >34 Street Name, City Name Here, India</span></li>
-              <li class="d-block"><span class="d-block">Telephone:</span><span >74153-49908</span></li>
-              <li class="d-block"><span class="d-block">Email:</span><span >chinmay1305@gmail.com</span></li>
-            </ul>
-          </div>
-          <div class="col-md-3 mb-5">
-            <h3>Quick Links</h3>
-            <ul class="list-unstyled footer-link">
-              <li><a href="/about/">About</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-          
-          </div>
+          <!-- Grid column -->
+
         </div>
+        <!-- Grid row-->
+
       </div>
-    </footer>
+    </div>
+
+
+<!-- Footer Links -->
+<div class="container text-center text-md-left mt-5">
+
+  <!-- Grid row -->
+  <div class="row mt-3 text-dark">
+
+    <!-- Grid column -->
+    <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+
+      <!-- Content -->
+      <h6 class="text-uppercase font-weight-bold">About Us</h6>
+      <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+      <p>Hey welcome to our services. Here you can browse different plans and also have the facility of payment.</p>
+
+    </div>
+    <!-- Grid column -->
+
+
+    <!-- Grid column -->
+    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+      <!-- Links -->
+      <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+      <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+      <p>
+        <a class="text-dark" href="#!">Your Account</a>
+      </p>
+      <p>
+        <a class="text-dark" href="{{'term_condition'}}">Term & Conditions</a>
+      </p>
+      <p>
+        <a class="text-dark" href="#!">Know More</a>
+      </p>
+      <p>
+        <a class="text-dark" href="#!">Help</a>
+      </p>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+      <!-- Links -->
+      <h6 class="text-uppercase font-weight-bold">Contact</h6>
+      <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+      <p>
+        <i class="fas fa-home mr-3"></i> Bhopal, M.P, INDIA</p>
+      <p>
+        <i class="fas fa-envelope mr-3"></i> HiBird@gmail.com</p>
+      <p>
+        <i class="fas fa-phone mr-3"></i> + 91 234 567 88</p>
+      <p>
+        <i class="fas fa-print mr-3"></i> + 91 234 567 89</p>
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div class="footer-copyright text-center text-black-50 py-3">© 2020 Copyright:
+  <a class="text-dark font-weight-bold" href="#"> HiBird.com</a>
+</div>
+<!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+</div>
 
 </body>
 </html>

@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse
 from .models import *
 from django.http import HttpResponseRedirect
 import razorpay
-from datetime import datetime
+from datetime import datetime,timedelta,date
 
 # Create your views here.
 from rest_framework.permissions import IsAuthenticated
@@ -48,7 +48,8 @@ class PersonalInfoView(APIView):
     	'last_name': user.last_name,  
     	'email': user.email,  
     	'mobile_no': profile.mobile_no,  
-    	'current_plan':profile.current_plan
+    	'current_plan':profile.current_plan,
+    	'available':(profile.due_date-date.today()).days
     	}
     	return Response(content)
 
@@ -56,14 +57,14 @@ class PaymentInfoView(APIView):
 	permission_classes = [IsAuthenticated]
 	def get(self, request, format=None):
 		user = request.user
-		try:
-			transaction = TransactionDetail.objects.filter(user=user).order_by('-date')
-			last_payment = transaction.first()
-			if last_payment:
-				if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
-					return Response({'status':'true','amount':0})
-		except:
-			return Response({'detail':'Not a Valid User'})
+		# try:
+		# 	transaction = TransactionDetail.objects.filter(user=user).order_by('-date')
+		# 	last_payment = transaction.first()
+		# 	if last_payment:
+		# 		if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
+		# 			return Response({'status':'true','amount':0})
+		# except:
+		# 	return Response({'detail':'Not a Valid User'})
 		profile = Profile.objects.get(user=user)
 		DATA = {
 		'amount':profile.plan_amount*100,
@@ -73,12 +74,10 @@ class PaymentInfoView(APIView):
 		client = razorpay.Client(auth=('rzp_test_gRPiCKGFiZqfz3','Px4TjJH8yq5bipqdPEILY35a'))
 		dic = client.order.create(data=DATA)
 		try:
-			transaction = TransactionDetail.objects.get(user=user,success=False,payment_month=str(datetime.today().strftime("%B")))
-			transaction.order_id = dic['id']
+			transaction = TransactionDetail(user=user,order_id=dic['id'])
 			transaction.save()
 		except:
-			transaction = TransactionDetail(user=user,order_id=dic['id'],payment_month=datetime.today().strftime("%B"))
-			transaction.save()
+			pass
 		content = {
     	'order':dic['id'],
         'status':'false', 
@@ -87,6 +86,7 @@ class PaymentInfoView(APIView):
     	'key':'rzp_test_gRPiCKGFiZqfz3'
     	}
 		return Response(content)
+	
 	def post(self,request):
 		print(request.data)
 		id_of_transaction = int(request.data.get('id'))
@@ -97,6 +97,9 @@ class PaymentInfoView(APIView):
 		try:
 			client.utility.verify_payment_signature({'razorpay_order_id':transaction.order_id,'razorpay_payment_id':request.data.get('razorpay_payment_id'),'razorpay_signature':request.data.get('razorpay_signature')})
 			transaction.success	=True
+			profile = Profile.objects.get(user=request.user)
+			profile.due_date = profile.due_date+timedelta(days=30)
+			profile.save()
 			transaction.save()
 			return Response({'transaction':True})
 		except:
@@ -115,12 +118,12 @@ def profile(request):
 	except:
 		return HttpResponseRedirect('/login/')
 	transaction = TransactionDetail.objects.filter(user=user).order_by('-date')
-	last_payment = transaction.first()
-	if last_payment:
-		if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
-			return render(request,'profile.html',{'user':user,'profile':profile,'transaction':transaction,'paid':False})
+	# last_payment = transaction.first()
+	# if last_payment:
+	# 	if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
+	# 		return render(request,'profile.html',{'user':user,'profile':profile,'transaction':transaction,'paid':False})
 
-	return render(request,'profile.html',{'user':user,'profile':profile,'transaction':transaction,'paid':True})
+	return render(request,'profile.html',{'user':user,'profile':profile,'transaction':transaction,'available':(profile.due_date-date.today()).days})
 
 def payment(request):
 	if request.method=='GET':
@@ -129,14 +132,14 @@ def payment(request):
 			profile = Profile.objects.get(user=user)
 		except:
 			return HttpResponseRedirect('/login/')
-		try:
-			transaction = TransactionDetail.objects.filter(user=user).order_by('date')
-			last_payment = transaction.first()
-			if last_payment:
-				if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
-					return HttpResponseRedirect('/profile/')
-		except:
-			pass
+		# try:
+		# 	transaction = TransactionDetail.objects.filter(user=user).order_by('date')
+		# 	last_payment = transaction.first()
+		# 	if last_payment:
+		# 		if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
+		# 			return HttpResponseRedirect('/profile/')
+		# except:
+		# 	pass
 
 		DATA = {
 		'amount':profile.plan_amount*100,
@@ -146,12 +149,10 @@ def payment(request):
 		client = razorpay.Client(auth=('rzp_test_gRPiCKGFiZqfz3','Px4TjJH8yq5bipqdPEILY35a'))
 		dic = client.order.create(data=DATA)
 		try:
-			transaction = TransactionDetail.objects.get(user=user,success=False,payment_month=str(datetime.today().strftime("%B")))
-			transaction.order_id = dic['id']
+			transaction = TransactionDetail(user=user,order_id=dic['id'])
 			transaction.save()
 		except:
-			transaction = TransactionDetail(user=user,order_id=dic['id'],payment_month=datetime.today().strftime("%B"))
-			transaction.save()
+			pass
 		return render(request,'payment.html',{'order':dic['id'],'amount':dic['amount'],'user':profile,'key':'rzp_test_gRPiCKGFiZqfz3','transaction':transaction})
 
 	else:
@@ -164,6 +165,9 @@ def payment(request):
 		try:
 			client.utility.verify_payment_signature({'razorpay_order_id':transaction.order_id,'razorpay_payment_id':data['razorpay_payment_id'],'razorpay_signature':data['razorpay_signature']})
 			transaction.success	=True
+			profile = Profile.objects.get(user=request.user)
+			profile.due_date = profile.due_date+timedelta(days=30)
+			profile.save()
 			transaction.save()
 			return HttpResponseRedirect('/profile/')
 		except:

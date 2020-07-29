@@ -7,36 +7,35 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
 from django.contrib.admin import SimpleListFilter
-from datetime import datetime
+from datetime import datetime,date
 
 class PaidFilter(SimpleListFilter):
-    title = 'Bill Paid' # or use _('country') for translated title
-    parameter_name = 'country'
+    title = 'Bill Paid'
+    parameter_name = 'due_date'
 
     def lookups(self, request, model_admin):
-        #countries = set([c.month for c in model_admin.model.objects.all()])
         return [('Not Paid','Not Paid'),]
 
     def queryset(self, request, queryset):
         if self.value() == 'Not Paid':
-            users = TransactionDetail.objects.filter(payment_month=datetime.today().strftime("%B"),success=True).values_list('user__username')
-            return User.objects.exclude(username__in=users)
+            return Profile.objects.filter(due_date__lte=date.today())
 
-admin.site.register(Profile)
 
 class TransactionAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__first_name','user__email',)
-    list_filter = ('success','payment_month',)
+    list_filter = ('success',)
 
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__email','user__mobile_no',)
+    readonly_fields = ('due_date',)
+    list_filter = (PaidFilter,)
 
-
+admin.site.register(Profile,ProfileAdmin)
 
 admin.site.register(TransactionDetail,TransactionAdmin)
 class UserAdmin(UserAdmin):
     add_form = UserCreateForm
-    list_filter = (PaidFilter,'is_staff',)
+    list_filter = ('is_staff',)
     prepopulated_fields = {'username': ('email' , )}
     add_fieldsets = (
         (None, {
@@ -69,3 +68,5 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(PlanDetail)
 admin.site.register(Slider)
+admin.site.site_header = "Hibird Panel"
+admin.site.site_title = "Hibird "
