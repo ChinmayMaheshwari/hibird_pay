@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from .serializers import *
-
+from .utils import render_to_pdf
 
 class SliderView(viewsets.ModelViewSet):
 	queryset = Slider.objects.all()
@@ -173,6 +173,17 @@ def payment(request):
 		except:
 			return HttpResponse('Transaction Failed')
 
+def generateInvoice(request):
+	user = request.user
+	profile = Profile.objects.get(user=user)
+	data = {
+	'customer_id':user.username,
+	'email':user.email,
+	'mobile_no':profile.mobile_no,
+	'name':user.first_name
+	}
+	pdf = render_to_pdf('invoice.html',data)
+	return HttpResponse(pdf, content_type='application/pdf')
 
 # order_amount = 50000
 # order_currency = 'INR'

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+  
+  <title>HiBird Invoice</title>
+  <style type="text/css">
+    
+  </style>
+  
+</head>
+
+<body>
+
+  <div id="page-wrap">
+
+    <h1 id="header" style="text-align: center;">INVOICE</h1>
+    
+    <div id="identity">
+    
+            <p id="address">Chris Coyier
+123 Appleseed Street
+Appleville, WI 53719
+
+Phone: (555) 555-5555</p>
+
+            <div id="logo">
+
+              <img id="image" src="https://hybird.herokuapp.com/media/hybird_logo.png" alt="logo" />
+            </div>
+    
+    </div>
+    
+    <div style="clear:both"></div>
+    
+    <div id="customer">
+
+            <textarea id="customer-title">Widget Corp.
+c/o Steve Widget</textarea>
+
+            <table id="meta">
+                <tr>
+                    <td class="meta-head">Invoice #</td>
+                    <td><textarea>000123</textarea></td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head">Date</td>
+                    <td><textarea id="date">December 15, 2009</textarea></td>
+                </tr>
+                <tr>
+                    <td class="meta-head">Amount Due</td>
+                    <td><div class="due">$875.00</div></td>
+                </tr>
+
+            </table>
+    
+    </div>
+    
+    <table id="items">
+    
+      <tr>
+          <th>Item</th>
+          <th>Description</th>
+          <th>Unit Cost</th>
+          <th>Quantity</th>
+          <th>Price</th>
+      </tr>
+      
+      <tr class="item-row"><td class="item-name" style="text-align: center;"><div class="delete-wpr"><p>Web Updates</p></div></td>
+          <td class="description" style="text-align: center;"><p>Monthly web updates </p></td>
+          <td><p class="cost" style="text-align: center;">$650.00</p></td>
+          <td><p class="qty" style="text-align: center;">1</p></td>
+          <td><p class="price" style="text-align: center;">$650.00</p></td>
+      </tr>
+      
+      
+      <tr id="hiderow">
+        <td colspan="5"></td>
+      </tr>
+      
+      <tr>
+
+          <td colspan="2" class="blank"> </td>
+          <td colspan="2" class="total-line">Total</td>
+          <td class="total-value"><div id="total">$875.00</div></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="blank"> </td>
+          <td colspan="2" class="total-line">Amount Paid</td>
+
+          <td class="total-value"><textarea id="paid">$0.00</textarea></td>
+      </tr>
+      
+    
+    </table>
+    
+    <div id="terms">
+      <h5 style="text-align: center;">Terms</h5>
+      <p style="text-align: center;">NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</p>
+    </div>
+  
+  </div>
+  
+</body>
+
+</html>
