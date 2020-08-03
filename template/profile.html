@@ -2,19 +2,20 @@
 
 
 {% block content %}
+<style type="text/css">
+    body {
+  font-family: 'Montserrat', sans-serif;
+  background-color:#beeafb;
+  color: #fff;
+}
+</style>
 <div class="container emp-profile mt-5">
             <form method="get" action="/payment/">
                 <div class="row mt-4">
                     <div class="col-lg-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <!-- <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div> -->
-                        </div>
+                        
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin-top:50px">
                         <div class="profile-head">
                                     <h5>
                                         {{user.first_name}} {{user.last_name}}                                    </h5>
