@@ -8,16 +8,25 @@
   background-color:#beeafb;
   color: #fff;
 }
-</style>
+h5{
+    color:black;
+    font-weight: bold;
+}
+  label {
+    color: black;
+  }
 
-<div class="container emp-profile mt-5">
+</style>
+<div style="margin-bottom:300px;margin-top:200px">
+
+<div class="container emp-profile mt-5" style="background-color:white;padding:30px;">
             <form method="get" action="/payment/">
                 <div class="row mt-4">
                     <div class="col-lg-4">
                         
                     </div>
                     <div class="col-md-6" style="margin-top:50px">
-                        <div class="profile-head">
+                        <div class="profile-head" style="margin-bottom:20px">
                                     <h5>
                                         {{user.first_name}} {{user.last_name}}                                    </h5>
                                     <p class="proile-rating">{{profile.current_plan}}</p>
@@ -123,5 +132,5 @@
                 </div>
             </form>           
         </div>
-
+</div>
 {% endblock content %}

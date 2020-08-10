@@ -50,7 +50,7 @@ class PersonalInfoView(APIView):
     	'mobile_no': profile.mobile_no,
     	'amount':profile.plan_amount,  
     	'current_plan':profile.current_plan,
-    	'due_date':profile.due_date,
+    	'renew_date':profile.due_date,
     	'available':(profile.due_date-date.today()).days
     	}
     	return Response(content)
