@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
 from django.contrib.admin import SimpleListFilter
-from datetime import datetime,date
+from datetime import datetime,date,timedelta
 
 class PaidFilter(SimpleListFilter):
     title = 'Bill Paid'
@@ -29,6 +29,17 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__email','user__mobile_no',)
     readonly_fields = ('due_date',)
     list_filter = (PaidFilter,)
+    actions = ['send_remider',]
+
+    def send_remider(self,request,queryset):
+        from django.core.mail import send_mail
+        users = Profile.objects.filter(due_date__lte=date.today()+timedelta(days=3))
+        for i in users:
+            if i.user.email:
+                send_mail('Hibird Payment Remider','Hello '+i.user.first_name+
+                    ',This is to remind you your wifi services are going to expire on '+
+                    str(i.due_date)+' please pay your due to continue our services. use https://hybird.herokuapp.com for paying your dues',
+                    'chinmay1305@gmail.com',[i.user.email,]) 
 
 admin.site.register(Profile,ProfileAdmin)
 

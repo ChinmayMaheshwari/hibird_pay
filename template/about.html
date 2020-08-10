@@ -1,47 +1,251 @@
+
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-  
-<div class="card-deck" style="margin:50px">
-  <div class="card">
-    <img class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">ABC</h5>
-      <p class="card-text">CEO of Hibird </p>
-      <p class="card-text"><ul class="list-unstyled footer-link d-flex footer-social">
-              <li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-linkedin"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
-            </ul></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><ul class="list-unstyled footer-link d-flex footer-social">
-              <li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-linkedin"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
-            </ul></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><ul class="list-unstyled footer-link d-flex footer-social">
-              <li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-linkedin"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
-            </ul></p>
-    </div>
-  </div>
-</div>
+   <style>
+        
+        h1{
+            align-content: center;
+            padding-top: 55px;
+            color: black;
+            margin-left: 40px;
+        }
+        p{    
+            font-size: 15px;
+            color: black;
+            padding-left: 30px;
+            padding-right: 0px;
+            margin:0px 0px 16px; 
+        }
+        .sp1{
+            color: red;
+            font-style:oblique;
+        }
+        .sp2{
+            color: red;
+        }
+        .container1 {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-top: 50px;
+            margin-left: 50px;
+            margin-right: 0px;
+    
+}
+       #s1
+        {
+            margin-left: 1000px;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+        .img1
+        {
+            width: 630px;
+            height: 247.5px;
+            padding-left: 150px;
+            padding-right: 0px;
+        }
+        #about
+        {
+            font-size: 25px;
+            color: #000;
+            font-family:sans-serif;
+            font-weight: 1600px;
+            overflow-x: hidden;
+            
+        }
+         #more 
+        {
+            display: none;
+        }
+        #myBtn
+        {
+            font: 14px sans-serif;
+            float: right;
+            margin-top: 0px;
+            color:darkcyan;
+            border: none;
+            width: 120px;
+            height: 30px;
+            pointer-events: auto;
+        }
+        .abtQuote {
+            font-size: 20px;
+            color: #000;
+            font-style: italic;
+            background-image: url({% static "img/right_quote.png" %});
+            max-width: 1000px;
+            margin-top: 60px;
+            margin-left: 170px;
+            text-align: center;
+            padding: 40px 60px;
+            background-repeat: no-repeat;
+            padding-top: 20px;
+            padding-bottom: 0px;
+        }
+        #features .feature-block {
+            width: 200px;
+            background: #fff none repeat scroll 0 0;
+            padding: 10px;
+            margin-bottom: 30px;
+            transition: all 0.5s ease-in-out 0s;
+            border-radius: 25px;
+            margin-top: 0px;
 
+        }
+        h3 {
+            color: #000000;
+            font-size: 24px;
+            padding: 50px;
+        }
+
+        </style>
+         <script>
+        function myFunction() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("myBtn");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more";
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less";
+   moreText.style.display = "inline";
+  }
+}
+    </script>
+   
+        <div style="background-color:#b7eafd;">
+    <div class="content">
+  <div class="container1" style="padding-top:50px">
+    <h2 class="head1"><span class="hTxt">ABOUT US</span> 
+      <div class="clearfix"></div>
+      <span class="sepS"></span>
+    </h2>
+    <div class="row">
+      <div class="col-md-6" id="about">
+        <p>If you're looking for high speed Internet access, you are at the right place. <span class="sp2">Hibird Broadband </span>(powerd by Alliance Broadband) has been a leader in high-speed Internet for well over a decade. Explore your internet connection’s full potential with us and enjoy complete home and business solution.The online experience gets a whole lot better with Hibird Broadband.<br/><span style="font-size: 18px; font-style: italic; font-family:serif">H.A.P.L   is the best Internet Service Provider in  UP region. Established in 2018, the company has successfully mastered the technical competence to deliver the best quality of service to our clients a Public Sector, Semi-Government Sector.</span> <span id="dots">...</span><span id="more"><br/>Our network Design totally FTTH Module and we are providing Unlimited Plans only with OTT Services. We already have ‘C’ class category ISP Licence in lucknow.
+                We provide Internet Services to various companies. Sometimes a company is run in a building on various floors, they require high speed internet services with broadband. In that case we do provide high speed internet services to those companies. Whether the company is small in size or big we are capable of providing high definition internet services to them.
+                A number of technologies first have to connect with the network and then the internet access is provided by the ISP that is the Internet Service Provider. The technologies range from telephone lines, wireless Ethernet, television cables, fibre optics and computer modems. For small businesses, traditional options may be used, such as, dial up, cable modem or fibre to home services may be used. Another option may be wireless access which includes satellite internet access.</span>
+        </p>
+                <button onclick="myFunction()" id="myBtn" align="left">Read more...</button>
+        
+      </div>
+      <div  class="img1" id="about-image">
+        <img src="{% static "img/about_1.jpg" %}" width="100%" alt="About">
+      </div>
+    </div>
+            <p class="abtQuote">
+                We offer broadband on optic fiber and our Fiber-To-The-Home technology can carry vast amount of information at speeds up to 1 Gbps. 
+            </p>
+     </div>
+        <div id="s1">
+            <img src="{% static "img/left_quote.png" %}" />
+        </div>
+</div>
+    
+    <!--===================OUR SERVICES
+    ===============-->
+    <div class="row" style="position: relative;">
+    <div class="col">
+      <section id="features" class="padd-section text-center wow fadeInUp mt-4" style="padding-top: 0px; padding-bottom: 10px">
+
+        <div class="container">
+          <div class="section-title text-center">
+            <h2 style="font-weight: normal; font-size: 30px; font-style:italic; margin-top: 0px; margin-bottom: 0px"> Our Services </h2>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block" style="height: 125.6px;" >
+                <img src="{% static "img/leaseline.jpg" %}" alt="img" class="img-fluid" style="margin-bottom: 0px;">
+                <h4 style="text-transform: none;">Internet <br>Lease-line</h4>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block" style="height: 125.6px;">
+                <img src="{% static "img/point%20to%20point.jfif" %}" img/svg/bb.svg alt="img" class="img-fluid" style="margin-bottom: 0px;">
+                <h4 style="text-transform: none;">Point to Point<br>Connection</h4>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block" style="height: 125.6px;">
+                <img src="{% static "img/wireless.jfif" %}" img/svg/support.svg alt="img" class="img-fluid" style="margin-bottom: 0px;">
+                <h4 style="text-transform: none;">Wireless <br> Internet</h4>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block" style="height: 125.6px;">
+                <img src="{% static "img/voip.png" %}" alt="img" class="img-fluid" style="padding: 5px; margin-bottom: 0px;">
+                <h4 style="text-transform: none;">Voip</h4>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+    </div>
+  </div>
+    <div class="row" style="position: relative;">
+    <div class="col">
+      <section id="features" class="padd-section text-center wow fadeInUp mt-4" style="padding-top: 0px; padding-bottom: 10px">
+
+        <div class="container">
+          <div class="section-title text-center">
+            <h2 style="font-weight: normal; font-size: 30px; font-style:italic; margin-top: 0px; margin-bottom: 0px"> Our Partners </h2>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block" >
+                <img src="{% static "img/airtel.jfif" %}" alt="img" class="img-fluid" style="margin-bottom: 0px;">
+                <h4 style="text-transform: none;">Airtel</h4>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block" style="height: 125.6px;">
+                <img src="{% static "img/alliance.jfif" %}" img/svg/bb.svg alt="img" class="img-fluid" style="padding-top: 20px; padding-bottom: 0px;margin-bottom: 0px;">
+                <h4 style="text-transform: none;">Alliance Broadband</h4>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block">
+                <img src="{% static "img/act.png" %}" img/svg/support.svg alt="img" class="img-fluid" style="margin-bottom: 0px;" >
+                <h4 style="text-transform: none;">ACT</h4>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="feature-block" >
+                <img src="{% static "img/inet.png" %}" alt="img" class="img-fluid" style="margin-bottom: 0px;">
+                <h4 style="text-transform: none;">iNet</h4>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+    </div>
+  </div>
+  </div>
 {% endblock content %}

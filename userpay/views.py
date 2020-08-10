@@ -22,7 +22,6 @@ class PlanView(viewsets.ModelViewSet):
 	serializer_class = PlanSerializer
 	http_method_names = ['get']	
 
-
 class TransactionView(viewsets.ModelViewSet):
 	queryset = TransactionDetail.objects.all()
 	serializer_class = TransactionDetailSerializer
@@ -33,6 +32,7 @@ class TransactionView(viewsets.ModelViewSet):
 		user =self.request.user
 		print(user.username)
 		return self.queryset.filter(user=user)
+
 class PersonalInfoView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -47,8 +47,10 @@ class PersonalInfoView(APIView):
         'first_name': user.first_name,  
     	'last_name': user.last_name,  
     	'email': user.email,  
-    	'mobile_no': profile.mobile_no,  
+    	'mobile_no': profile.mobile_no,
+    	'amount':profile.plan_amount,  
     	'current_plan':profile.current_plan,
+    	'due_date':profile.due_date,
     	'available':(profile.due_date-date.today()).days
     	}
     	return Response(content)
@@ -57,14 +59,6 @@ class PaymentInfoView(APIView):
 	permission_classes = [IsAuthenticated]
 	def get(self, request, format=None):
 		user = request.user
-		# try:
-		# 	transaction = TransactionDetail.objects.filter(user=user).order_by('-date')
-		# 	last_payment = transaction.first()
-		# 	if last_payment:
-		# 		if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
-		# 			return Response({'status':'true','amount':0})
-		# except:
-		# 	return Response({'detail':'Not a Valid User'})
 		profile = Profile.objects.get(user=user)
 		DATA = {
 		'amount':profile.plan_amount*100,
@@ -88,7 +82,6 @@ class PaymentInfoView(APIView):
 		return Response(content)
 	
 	def post(self,request):
-		print(request.data)
 		id_of_transaction = int(request.data.get('id'))
 		transaction = TransactionDetail.objects.get(id=id_of_transaction)
 		transaction.date=datetime.now()
@@ -118,11 +111,6 @@ def profile(request):
 	except:
 		return HttpResponseRedirect('/login/')
 	transaction = TransactionDetail.objects.filter(user=user).order_by('-date')
-	# last_payment = transaction.first()
-	# if last_payment:
-	# 	if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
-	# 		return render(request,'profile.html',{'user':user,'profile':profile,'transaction':transaction,'paid':False})
-
 	return render(request,'profile.html',{'user':user,'profile':profile,'transaction':transaction,'available':(profile.due_date-date.today()).days})
 
 def payment(request):
@@ -156,7 +144,6 @@ def payment(request):
 		return render(request,'payment.html',{'order':dic['id'],'amount':dic['amount'],'user':profile,'key':'rzp_test_gRPiCKGFiZqfz3','transaction':transaction})
 
 	else:
-		# client.utility.verify_payment_signature({'razorpay_order_id':})
 		data = request.POST
 		transaction = TransactionDetail.objects.get(id=request.POST['tran'])
 		transaction.date=datetime.now()
@@ -174,20 +161,26 @@ def payment(request):
 			return HttpResponse('Transaction Failed')
 
 def generateInvoice(request):
-	user = request.user
-	profile = Profile.objects.get(user=user)
-	data = {
-	'customer_id':user.username,
-	'email':user.email,
-	'mobile_no':profile.mobile_no,
-	'name':user.first_name
-	}
-	pdf = render_to_pdf('invoice.html',data)
-	return HttpResponse(pdf, content_type='application/pdf')
-
-# order_amount = 50000
-# order_currency = 'INR'
-# order_receipt = 'order_rcptid_11'
-# notes = {'Shipping address': 'Bommanahalli, Bangalore'}   # OPTIONAL
-
-# client.order.create(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0')
+	if request.user:
+		user = request.user
+		profile = Profile.objects.get(user=user)
+		data = {
+		'customer_id':user.username,
+		'email':user.email,
+		'mobile_no':profile.mobile_no,
+		'name':user.first_name,
+		'date':date.today()
+		}
+		pdf = render_to_pdf('invoice.html',data)
+		if pdf:
+			response = HttpResponse(pdf, content_type='application/pdf')
+			filename = "Invoice.pdf"
+			content = "inline; filename='Invoice.pdf'"
+			download = request.GET.get("download")
+			if download:
+			    content = "attachment; filename='Invoice.pdf'"
+			response['Content-Disposition'] = content
+			return response
+		# return HttpResponse(pdf, content_type='application/pdf')
+	else:
+		return HttpResponseRedirect('/login/')
