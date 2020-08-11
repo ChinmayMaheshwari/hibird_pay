@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 
 {% block content %}
@@ -18,14 +19,32 @@ h5{
 
 </style>
 <div style="margin-bottom:300px;margin-top:200px">
-
 <div class="container emp-profile mt-5" style="background-color:white;padding:30px;">
+    <div class="row mt-4">
+    <div class="col-md-4">
+                            <h1 style="color:black;margin-top:100px;">Tranasactions</h1>
+                        <div class="overflow-auto">
+                        <div class="list-group" style="overflow-y:scroll;height:400px;">
+                            {% for tran in transaction %}
+                      <a href="/invoice/{{tran.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">{{tran.payment_id}}</h5>
+                          <small class="text-muted">{% if tran.success %} Success{% else %} Fail{% endif %}</small>
+                        </div>
+                        <p class="mb-1">{{profile.plan_amount}} ₹</p>
+                        <small class="text-muted">{{tran.date}}</small>
+                      </a>
+                      {% endfor %}
+                    </div>
+                    </div>
+                      
+                </div>
+                    <div class="col-md-8">
             <form method="get" action="/payment/">
                 <div class="row mt-4">
-                    <div class="col-lg-4">
-                        
-                    </div>
-                    <div class="col-md-6" style="margin-top:50px">
+                    
+                    <div class="col-md-8" style="margin-top:50px">
+                        <img src="{% static "/img/user.png" %}" height="100px" style="padding:10px">
                         <div class="profile-head" style="margin-bottom:20px">
                                     <h5>
                                         {{user.first_name}} {{user.last_name}}                                    </h5>
@@ -43,9 +62,6 @@ h5{
                     
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        
-                    </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -131,6 +147,8 @@ h5{
                     </div>
                 </div>
             </form>           
+            </div>
+            </div>
         </div>
 </div>
 {% endblock content %}

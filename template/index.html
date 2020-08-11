@@ -137,87 +137,28 @@
 
     <div class="container">
       <div class="row">
-
-        <div class="col-md-6 col-lg-3">
+        {% for plandetail in plan %}
+        <div class="col-md-6 col-lg-3" style="margin-bottom:10px">
           <div class="block-pricing">
             <div class="table">
               <h4>Monthy-PLan</h4>
-              <h2>Rs-950</h2>
+              <h2>Rs-{{plandetail.amount}}<small style="font-size:10px">+GST and Taxes</small></h2>
               <ul class="list-unstyled">
-                <li><b>25 mpbs</b> Speed</li>
+                <li><b>{{plandetail.title}}</b> Speed</li>
                 <li><b>7/24</b> Tech Support</li>
                 <li><b>Data Per Month</b> Unlimited</li>
-                <li><b>Special Offer</b> NA</li>
+                <li>{{plandetail.description}}</li>
                 <li>Free Router</li>
                 <li>Free Installation</li>
               </ul>
               <div class="table_btn">
-                <a href="#" class="btn"> Select</a>
+                <a href="#contact" class="btn"> Select</a>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="col-md-6 col-lg-3">
-          <div class="block-pricing">
-            <div class="table">
-              <h4> 3 Month-PLan</h4>
-              <h2>Rs-2700</h2>
-              <ul class="list-unstyled">
-                <li><b>25 mpbs</b> Speed</li>
-                <li><b>7/24</b> Tech Support</li>
-                <li><b>Data Per Month</b> Unlimited</li>
-                <li><b>Special Offer</b> 10% Dicount</li>
-                <li>Free Router</li>
-                <li>Free Installation</li>
-              </ul>
-              <div class="table_btn">
-                <a href="#" class="btn"> Select</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3">
-          <div class="block-pricing">
-            <div class="table">
-              <h4> 6 Month-PLan</h4>
-              <h2>Rs-4860</h2>
-              <ul class="list-unstyled">
-                <li><b>25 mpbs</b> Speed</li>
-                <li><b>7/24</b> Tech Support</li>
-                <li><b>Data Per Month</b> Unlimited</li>
-                <li><b>Special Offer</b> 10% Dicount</li>
-                <li>Free Router</li>
-                <li>Free Installation</li>
-              </ul>
-              <div class="table_btn">
-                <a href="#" class="btn"><i class="#"></i> Select</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3">
-          <div class="block-pricing">
-            <div class="table">
-              <h4> 1 Year-PLan </h4>
-              <h2>Rs-9180</h2>
-              <ul class="list-unstyled">
-                <li><b>25 mpbs</b> Speed</li>
-                <li><b>7/24</b> Tech Support</li>
-                <li><b>Data Per Month</b> Unlimited</li>
-                <li><b>Special Offer</b> 15% Dicount</li>
-                <li>Free Router</li>
-                <li>Free Installation</li>
-              </ul>
-              <div class="table_btn">
-                <a href="#" class="btn"> Select</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        {% endfor %}
+        
     </div>
   </section>
 

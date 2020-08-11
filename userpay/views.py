@@ -99,7 +99,8 @@ class PaymentInfoView(APIView):
 			return Response({'transaction':False})
 
 def index(request):
-	return render(request,'index.html')
+	plan = PlanDetail.objects.all()
+	return render(request,'index.html',{'plan':plan})
 
 def about(request):
 	return render(request,'about.html')
@@ -120,14 +121,6 @@ def payment(request):
 			profile = Profile.objects.get(user=user)
 		except:
 			return HttpResponseRedirect('/login/')
-		# try:
-		# 	transaction = TransactionDetail.objects.filter(user=user).order_by('date')
-		# 	last_payment = transaction.first()
-		# 	if last_payment:
-		# 		if datetime.today().strftime("%B")==last_payment.payment_month and last_payment.success:
-		# 			return HttpResponseRedirect('/profile/')
-		# except:
-		# 	pass
 
 		DATA = {
 		'amount':profile.plan_amount*100,
@@ -160,8 +153,12 @@ def payment(request):
 		except:
 			return HttpResponse('Transaction Failed')
 
-def generateInvoice(request):
+def generateInvoice(request,tid=None):
 	if request.user:
+		try:
+			transaction = TransactionDetail.objects.get(id=tid,success=True)
+		except:
+			return HttpResponse('Invalid Transaction')
 		user = request.user
 		profile = Profile.objects.get(user=user)
 		data = {
@@ -169,7 +166,11 @@ def generateInvoice(request):
 		'email':user.email,
 		'mobile_no':profile.mobile_no,
 		'name':user.first_name,
-		'date':date.today()
+		'date':transaction.date,
+		'due_date':profile.due_date,
+		'tran_id':transaction.payment_id,
+		'amount':profile.plan_amount,
+		'month':profile.due_date.strftime('%B')
 		}
 		pdf = render_to_pdf('invoice.html',data)
 		if pdf:

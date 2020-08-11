@@ -226,7 +226,7 @@ footer {
                   <div id="details" class="clearfix">
         <div id="project">
           <div class="arrow"><div class="inner-arrow"><span>Date:</span> {{date}}</div></div>
-          <div class="arrow"><div class="inner-arrow"><span>Next Due Date:</span> {{date}}</div></div>
+          <div class="arrow"><div class="inner-arrow"><span>Next Due Date:</span> {{due_date}}</div></div>
         </div>
           </td>
       
@@ -234,7 +234,7 @@ footer {
         </td>
         <td align="right" style="margin: 0px; padding: 0px;">
           <div id="company">
-          <div class="arrow back"><div class="inner-arrow">Transaction ID<span>{{tran_id}}</span></div></div>
+          <div class="arrow back"><div class="inner-arrow">Transaction ID: <span>{{tran_id}}</span></div></div>
           <div class="arrow back"><div class="inner-arrow">Payment Mode: <span>Online</span></div></div>
           
         </td>
@@ -246,21 +246,21 @@ footer {
             <th class="service">SERVICE</th>
             <th class="desc">DESCRIPTION</th>
             <th>PRICE</th>
-            <th>QTY</th>
+            <th>Month</th>
             <th>TOTAL</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="service">Design</td>
-            <td class="desc">Creating a recognizable </td>
-            <td class="unit">$40.00</td>
-            <td class="qty">26</td>
-            <td class="total">$1,040.00</td>
+            <td class="service">Wifi Service Payment</td>
+            <td class="desc">Bill Payment For {{month}} </td>
+            <td class="unit">{{amount}} INR</td>
+            <td class="qty">1</td>
+            <td class="total">{{amount}} INR</td>
           </tr>
           <tr>
             <td colspan="4" class="grand total">GRAND TOTAL</td>
-            <td class="grand total">$6,500.00</td>
+            <td class="grand total">{{amount}} INR</td>
           </tr>
         </tbody>
       </table>
