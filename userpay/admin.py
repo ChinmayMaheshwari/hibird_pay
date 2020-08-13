@@ -9,6 +9,8 @@ from django.utils.crypto import get_random_string
 from django.contrib.admin import SimpleListFilter
 from datetime import datetime,date,timedelta
 
+import requests
+
 class PaidFilter(SimpleListFilter):
     title = 'Bill Paid'
     parameter_name = 'due_date'
@@ -34,13 +36,14 @@ class ProfileAdmin(admin.ModelAdmin):
     def send_remider(self,request,queryset):
         from django.core.mail import send_mail
         users = Profile.objects.filter(due_date__lte=date.today()+timedelta(days=3))
+        mobile = []
         for i in users:
+            message = 'Hello '+i.user.first_name+',This is to remind you your wifi services are going to expire on '+str(i.due_date)+' please pay your due to continue our services. use https://hybird.herokuapp.com for paying your dues'
             if i.user.email:
-                send_mail('Hibird Payment Remider','Hello '+i.user.first_name+
-                    ',This is to remind you your wifi services are going to expire on '+
-                    str(i.due_date)+' please pay your due to continue our services. use https://hybird.herokuapp.com for paying your dues',
-                    'chinmay1305@gmail.com',[i.user.email,]) 
-
+                send_mail('Hibird Payment Remider',message,'chinmay1305@gmail.com',[i.user.email,]) 
+            if i.mobile_no:
+                r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=hibird&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+i.mobile_no+'&text='+message)
+                print(r.status_code)
 admin.site.register(Profile,ProfileAdmin)
 
 admin.site.register(TransactionDetail,TransactionAdmin)
