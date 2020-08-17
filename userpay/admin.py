@@ -42,7 +42,7 @@ class ProfileAdmin(admin.ModelAdmin):
             if i.user.email:
                 send_mail('Hibird Payment Remider',message,'chinmay1305@gmail.com',[i.user.email,]) 
             if i.mobile_no:
-                r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=hibird&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+i.mobile_no+'&text='+message)
+                r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=HIBIRD&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+i.mobile_no+'&text='+message+'&route=02')
                 print(r.status_code)
 admin.site.register(Profile,ProfileAdmin)
 

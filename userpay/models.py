@@ -73,3 +73,9 @@ class Slider(models.Model):
 
 	def __str__(self):
 		return self.title
+
+class ContactFormData(models.Model):
+	contact_name = models.CharField(max_length=50)
+	contact_mobile = models.CharField(max_length=13)
+	subject = models.CharField(max_length=50)
+	message = models.TextField()

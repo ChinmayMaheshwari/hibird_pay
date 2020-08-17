@@ -50,7 +50,7 @@ class PersonalInfoView(APIView):
     	'mobile_no': profile.mobile_no,
     	'amount':profile.plan_amount,  
     	'current_plan':profile.current_plan,
-    	'renew_date':profile.due_date,
+    	'renew_date':profile.due_date.strftime('%d-%b-%Y'),
     	'available':(profile.due_date-date.today()).days
     	}
     	return Response(content)
@@ -68,7 +68,7 @@ class PaymentInfoView(APIView):
 		client = razorpay.Client(auth=('rzp_test_gRPiCKGFiZqfz3','Px4TjJH8yq5bipqdPEILY35a'))
 		dic = client.order.create(data=DATA)
 		try:
-			transaction = TransactionDetail(user=user,order_id=dic['id'])
+			transaction = TransactionDetail(user=user,order_id=dic['id'],date=datetime.today())
 			transaction.save()
 		except:
 			pass
@@ -130,7 +130,7 @@ def payment(request):
 		client = razorpay.Client(auth=('rzp_test_gRPiCKGFiZqfz3','Px4TjJH8yq5bipqdPEILY35a'))
 		dic = client.order.create(data=DATA)
 		try:
-			transaction = TransactionDetail(user=user,order_id=dic['id'])
+			transaction = TransactionDetail(user=user,order_id=dic['id'],date=datetime.today())
 			transaction.save()
 		except:
 			pass
