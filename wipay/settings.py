@@ -154,7 +154,7 @@ EMAIL_HOST_PASSWORD = 'jifhmozbdndedxal'
 EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = "profile"
-LOGOUT_REDIRECT_URL = "profile"
+LOGOUT_REDIRECT_URL = "index"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 import dj_database_url

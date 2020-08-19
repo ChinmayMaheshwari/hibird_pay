@@ -68,7 +68,7 @@ class PaymentInfoView(APIView):
 		client = razorpay.Client(auth=('rzp_test_gRPiCKGFiZqfz3','Px4TjJH8yq5bipqdPEILY35a'))
 		dic = client.order.create(data=DATA)
 		try:
-			transaction = TransactionDetail(user=user,order_id=dic['id'],date=datetime.today())
+			transaction = TransactionDetail(user=user,order_id=dic['id'],date=datetime.today(),amount=profile.plan_amount)
 			transaction.save()
 		except:
 			pass
@@ -130,7 +130,7 @@ def payment(request):
 		client = razorpay.Client(auth=('rzp_test_gRPiCKGFiZqfz3','Px4TjJH8yq5bipqdPEILY35a'))
 		dic = client.order.create(data=DATA)
 		try:
-			transaction = TransactionDetail(user=user,order_id=dic['id'],date=datetime.today())
+			transaction = TransactionDetail(user=user,order_id=dic['id'],date=datetime.today(),amount=profile.plan_amount)
 			transaction.save()
 		except:
 			pass

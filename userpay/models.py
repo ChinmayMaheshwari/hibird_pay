@@ -15,14 +15,17 @@ class Profile(models.Model):
 		('Pace+ | 20MBPS','Pace+ | 20MBPS'),
 		('Quick+ | 50MBPS','Quick+ | 50MBPS'),
 		)
+	def dueDate():
+		return timezone.now()+timezone.timedelta(days=30)
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
 	mobile_no = models.CharField(max_length=10)
 	current_plan = models.CharField(max_length=100,choices=packs,default=12)	
 	plan_amount = models.PositiveIntegerField()
 	address = models.TextField(blank=True,null=True)
 	document_no = models.CharField(max_length=20)
-	document = models.FileField(upload_to = file_path)
-	due_date = models.DateField(default=timezone.now)
+	document_front = models.FileField(upload_to = file_path,blank=True)
+	document_back = models.FileField(upload_to = file_path,blank=True)
+	due_date = models.DateField(default=dueDate)
 
 	def __str__(self):
 		return self.user.username
@@ -48,6 +51,7 @@ class TransactionDetail(models.Model):
 	date = models.DateTimeField(null=True,blank=True)
 	# payment_month = models.CharField(max_length=10,choices=month)
 	success = models.BooleanField(default=False)
+	amount = models.PositiveIntegerField(default=0)
 
 	def __str__(self):
 		return self.user.username
@@ -63,6 +67,7 @@ class PlanDetail(models.Model):
 	amount = models.PositiveIntegerField()
 	description = models.TextField()
 	photo = models.FileField(null=True,blank=True,upload_to='plan/')
+	offer_detail = models.CharField(max_length=50,default='NA')
 
 	def __str__(self):
 		return self.title
@@ -70,6 +75,20 @@ class PlanDetail(models.Model):
 class Slider(models.Model):
 	title = models.CharField(max_length=50)
 	photo = models.FileField(upload_to='slider/')
+
+	def __str__(self):
+		return self.title
+
+class WebSlider(models.Model):
+	title = models.CharField(max_length=50)
+	photo = models.FileField(upload_to='slider/')
+
+	def __str__(self):
+		return self.title
+
+class Entertainment(models.Model):
+	title = models.CharField(max_length=50)
+	photo = models.FileField(upload_to='entertainment/')
 
 	def __str__(self):
 		return self.title
