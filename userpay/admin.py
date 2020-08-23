@@ -28,7 +28,7 @@ class TransactionAdmin(admin.ModelAdmin):
     list_filter = ('success',)
 
 class ProfileAdmin(admin.ModelAdmin):
-    search_fields = ('user__username','user__email','user__mobile_no',)
+    search_fields = ('user__username','user__email','mobile_no',)
     readonly_fields = ('due_date',)
     list_filter = (PaidFilter,)
     actions = ['send_remider',]
