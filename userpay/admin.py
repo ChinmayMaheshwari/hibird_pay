@@ -57,6 +57,29 @@ class UserAdmin(UserAdmin):
             'fields': ('first_name', 'last_name', 'username','email', 'password1', 'password2', ),
         }),
     )
+    def change_view(self, request, object_id):
+
+        # we want to limit the ability of the normal user to edit permissions.
+        if request.user.is_superuser:
+            self.fieldsets = (
+                (None, {'fields': ('username', 'password')}),
+                (('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+                (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser','groups')}),
+                (('Important dates'), {'fields': ('last_login', 'date_joined')}),
+             #   (('Groups'), {'fields': ('groups',)}),
+            )
+        else:
+            self.fieldsets = (
+                (None, {'fields': ('username', 'password')}),
+                (('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+                #(('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
+                (('Important dates'), {'fields': ('last_login', 'date_joined')}),
+                #(('Groups'), {'fields': ('groups',)}),
+            )
+
+
+        return super(UserAdmin, self).change_view(request, object_id,
+            )
     def save_model(self, request, obj, form, change):
         if not change and (not form.cleaned_data['password1'] or not obj.has_usable_password()):
             # Django's PasswordResetForm won't let us reset an unusable
