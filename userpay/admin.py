@@ -32,7 +32,7 @@ class ProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('due_date',)
     list_filter = (PaidFilter,)
     actions = ['send_remider',]
-
+    autocomplete_fields = ['user',]
     def send_remider(self,request,queryset):
         from django.core.mail import send_mail
         users = Profile.objects.filter(due_date__lte=date.today()+timedelta(days=3))
@@ -70,10 +70,10 @@ class UserAdmin(UserAdmin):
             )
         else:
             self.fieldsets = (
-                (None, {'fields': ('username', 'password')}),
-                (('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+                (None, {'fields': ('username',)}),
+                #(('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
                 #(('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
-                (('Important dates'), {'fields': ('last_login', 'date_joined')}),
+                #(('Important dates'), {'fields': ('last_login', 'date_joined')}),
                 #(('Groups'), {'fields': ('groups',)}),
             )
 

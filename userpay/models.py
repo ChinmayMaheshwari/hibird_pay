@@ -17,7 +17,7 @@ class Profile(models.Model):
 		)
 	def dueDate():
 		return timezone.now()+timezone.timedelta(days=30)
-	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	user = models.OneToOneField(User,on_delete=models.CASCADE,verbose_name='UserID')
 	mobile_no = models.CharField(max_length=10)
 	current_plan = models.CharField(max_length=100,choices=packs,default=12)	
 	plan_amount = models.PositiveIntegerField()
