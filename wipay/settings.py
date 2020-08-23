@@ -154,9 +154,11 @@ EMAIL_HOST_PASSWORD = 'jifhmozbdndedxal'
 EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = "profile"
-LOGOUT_REDIRECT_URL = "index"
+#LOGOUT_REDIRECT_URL = "index"
+AUTH_USER_EMAIL_UNIQUE = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
+

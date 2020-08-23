@@ -71,7 +71,7 @@ class UserAdmin(UserAdmin):
         else:
             self.fieldsets = (
                 (None, {'fields': ('username',)}),
-                #(('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+                (('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
                 #(('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
                 #(('Important dates'), {'fields': ('last_login', 'date_joined')}),
                 #(('Groups'), {'fields': ('groups',)}),

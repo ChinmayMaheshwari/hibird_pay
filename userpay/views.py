@@ -107,6 +107,7 @@ def about(request):
 
 def profile(request):
 	user = request.user
+	request.session.set_expiry(40)
 	try:
 		profile = Profile.objects.get(user=user)
 	except:

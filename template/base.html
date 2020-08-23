@@ -58,7 +58,7 @@
               <li><a href="/#contact">Contact</a></li>
               {% if user.is_authenticated %}
               <li><a href="/profile/">Profile</a></li>
-              <li><a href="/logout/">Logout</a></li>
+              <li><a href="/logout/?next=/">Logout</a></li>
               {% else %}
               <li><a href="/login/">User Login</a></li>
               {% endif %}

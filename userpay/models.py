@@ -3,9 +3,12 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 # Create your models here.
 
-# from django.contrib.auth.models import User
+#from django.contrib.auth.models import AbstractUser
 # from django.dispatch import receiver
 # from django.db.models.signals import post_save
+
+from django.contrib.auth.models import User
+User._meta.get_field('email')._unique = True
 
 class Profile(models.Model):
 	def file_path(self,filename):
