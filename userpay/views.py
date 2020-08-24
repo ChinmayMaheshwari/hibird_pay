@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 import razorpay
 from datetime import datetime,timedelta,date
 
+from rest_framework.authtoken.models import Token
 # Create your views here.
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -107,7 +108,7 @@ def about(request):
 
 def profile(request):
 	user = request.user
-	request.session.set_expiry(40)
+	request.session.set_expiry(6000)
 	try:
 		profile = Profile.objects.get(user=user)
 	except:
@@ -154,13 +155,20 @@ def payment(request):
 		except:
 			return HttpResponse('Transaction Failed')
 
+
+
 def generateInvoice(request,tid=None):
-	if request.user:
+	token = request.GET.get('token')
+	user = request.user
+	if token:
+		print(token)
+		user = Token.objects.get(key=str(token)).user
+	print(user)
+	if user:
 		try:
 			transaction = TransactionDetail.objects.get(id=tid,success=True)
 		except:
 			return HttpResponse('Invalid Transaction')
-		user = request.user
 		profile = Profile.objects.get(user=user)
 		data = {
 		'customer_id':user.username,
@@ -170,8 +178,10 @@ def generateInvoice(request,tid=None):
 		'date':transaction.date,
 		'due_date':profile.due_date,
 		'tran_id':transaction.payment_id,
-		'amount':profile.plan_amount,
-		'month':profile.due_date.strftime('%B')
+		'amount':profile.plan_amount-(profile.plan_amount*18)/100,
+		'month':profile.due_date.strftime('%B'),
+		'nine_per':(profile.plan_amount*9)/100,
+		'total':profile.plan_amount
 		}
 		pdf = render_to_pdf('invoice.html',data)
 		if pdf:

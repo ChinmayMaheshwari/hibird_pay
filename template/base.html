@@ -9,8 +9,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+  
   <!-- Favicons -->
   <link href="{% static 'img/favicon.png' %}" rel="icon">
   <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
@@ -29,50 +28,99 @@
   <link href="{% static 'lib/owlcarousel/assets/owl.theme.default.min.css' %}" rel="stylesheet">
   <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   <!-- Main Stylesheet File -->
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style>
+        .fa-icon
+        {
+            font-size: 35px;
+            padding-left: 20px;
+            overflow: auto;
+            padding-right: 0px;
+        }
+        a:hover {
+            color:#4CAF50;
+        }
+        .active{
+            color: #4CAF50;
+        }
+         .abouttext {
+              visibility: hidden;
+              width: 120px;
+              color: blue;
+              text-align: center;
+              border-radius: 6px;
+              padding: 0px;
+              font-size: 20px;
+
+              /* Position the tooltip */
+              position: absolute;
+              z-index: 3;
+        }
+        a:hover .abouttext{
+            visibility: visible;
+            margin-right: auto;
+        }
+        element.style {
+    float: none;
+    list-style: none;
+    position: absolute;
+    width: 688px;
+    z-index: 50;
+    display: block;
+}
+    </style>
+    <script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
 </head>
 
 <body>
   <!--  -->
+   <button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>
   <div class="row" style="position: relative;">
     <div class="col">
       <!--  -->
       <header id="header" class="header header-hide">
         <div class="container">
-
-          <div class="pull-left">
-
-          <a href="/"><img src="{% static 'img/icon.png' %}" style="width: 250px; height:70px;" alt="logo">
-          </a></div><!--   <div id="logo" class="pull-left">
-        <h1><a href="#body" class="scrollto"><span>HI</span>BIRD</a></h1>
-      </div>-->
-
-          <nav id="nav-menu-container">
+          <a href="/"><img src="{% static 'img/icon.png' %}" style="width: 250px; height:60px margin-top:70px;" alt="logo"></a>
+        <nav id="nav-menu-container">
             <ul class="nav-menu">
-              <li class="menu-active"><a href="/">Home</a></li>
-              <li><a href="/about/">About</a></li>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="/#contact">Contact</a></li>
-              {% if user.is_authenticated %}
-              <li><a href="/profile/">Profile</a></li>
-              <li><a href="/logout/?next=/">Logout</a></li>
+                <a class="menu-active" href="/"><i class="fa fa-home fa-icon menu-active" style="color:#DA483B;" ><span class="icon">Home</span></i></a> 
+            <a href="/#pricing"><i class="fa fa-credit-card fa-icon" style="color:#4486F4;"><span class="icon">Pricing</span></i></a>
+             <a href="/#contact"><i class="fa fa-address-book fa-icon" style="color: #FFC718
+;"><span class="icon">Contact</span></i></a> 
+                
+                   <a href="/#features"><i class="fa fa-cog fa-icon" style="color: #8DC44F"><span class="icon">Services</span></i></a>
+              
+                 <a href="/about/"><i class="fa fa-info-circle fa-icon" style="color: #4486F4"><span class="icon">About</span></i></a>
+                 {% if user.is_authenticated %}
+               <a href="/profile/"><i class="fa fa-user fa-icon" style="color: #1CA45C;"><span class="icon">Profile</span></i></a> 
+               <a href="/logout/?next=/"><i class="fa fa-sign-out fa-icon" style="color: #1CA45C;"><span class="icon">Logout</span></i></a> 
+                        
               {% else %}
-              <li><a href="/login/">User Login</a></li>
-              {% endif %}
+              <a href="/login/"><i class="fa fa-user fa-icon" style="color: #FF9E0F"; ><span class="icon">Login</span></i></a> 
+              {% endif %} 
+                 
             </ul>
-          </nav><!-- #nav-menu-container -->
+          </nav>
+            
+            <!-- #nav-menu-container -->
         </div>
       </header>
-
+  
 
     </div>
   </div>
 
-
-
+  
   {% block content %}{% endblock content %}
 
   <!--==========================
@@ -167,7 +215,87 @@
   <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
   <script src="{% static 'lib/wow/wow.min.js' %}"></script>
   
-<script src="{% static 'js/main.js' %}"></script>  
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>  
+
+    <script id="rendered-js">
+    $('.carousel[data-type="multi"] .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  for (var i=0;i<2;i++) {if (window.CP.shouldStopExecution(0)) break;
+    next=next.next();
+    if (!next.length) {
+      next = $(this).siblings(':first');
+    }
+    
+    next.children(':first-child').clone().appendTo($(this));
+  }window.CP.exitedLoop(0);
+});
+    </script>
+    <script>
+    var Carousel = function (frameSelector, sliderSelector, slidesSelector, btnLeftSelector, btnRightSelector) {
+    //A variable to store the position of the slides
+    var leftPosition = 0;
+    var frame = document.querySelector(frameSelector);
+    var slides = document.querySelectorAll(slidesSelector);
+    //Get the number of slides in the slider
+    var slidesNumber = slides.length;
+    var leftButton = document.querySelector(btnLeftSelector);
+    var rightButton = document.querySelector(btnRightSelector);
+    var slider = document.querySelector(sliderSelector);
+
+    //Add classes to frame and slider divs
+    frame.classList.add('frame');
+    slider.classList.add('slider');
+
+    //Event listeners for when the user clicks on the arrows
+    leftButton.addEventListener("click", function() {
+        carousel.previous();
+    });
+
+    rightButton.addEventListener("click", function() {
+        carousel.next();
+    });
+
+    //Function that moves the slides left or right depending on variable value
+    //Moves to the next slide if value is -1, moves to the previous is value is 1
+    var moveSlide = function (value) {
+        leftPosition += value*350;
+        slider.style.left = leftPosition + 'px';
+    };
+
+    return {
+        //Function to move to next slide
+        next: function() {
+            if(leftPosition > (slidesNumber-1)*-350)
+            {
+                moveSlide(-1);
+            } else {
+                leftPosition = 0;
+                slider.style.left = leftPosition + 'px';
+            }
+        },
+        //Function to go to previous slide
+        previous: function() {
+            if(leftPosition !== 0) {
+                 moveSlide(1);
+            } else {
+                leftPosition = (slidesNumber-1)*-350;
+                slider.style.left = leftPosition + 'px';
+            }
+        }
+    };
+};
+
+//Create new instance of Carousel
+var carousel = new Carousel('#frame', '#slider', '#slider .slide', '.arrowLeft', '.arrowRight');
+    </script>
 
 </body>
 

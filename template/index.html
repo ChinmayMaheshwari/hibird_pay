@@ -38,26 +38,6 @@
   </div>
   <!-- slider end here -->
 
-  <!-- <section id="hero" class="wow fadeIn ">
-    <div class="hero-container">
-      <h1>Welcome to HI-BIRD BroadBand Services</h1>
-      <h2>The all new HI-BIRD app is live now. Stream unlimited without any trouble.</h2>
-      <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-          <img src="img/1.png" alt="Hero Imgs" style="position:center;">
-        </div>
-        <div class="col-3"></div>
-      </div>
-      <a href="#get-started" class="btn-get-started scrollto">Login</a>
-      <div class="btns">
-        <a href="#"><i class="fa fa-play fa-3x"></i> Google Play</a>
-      </div>
-    </div>
-  </section> -->
-  <!-- #hero -->
-
-
   <!--==========================
     Features Section
   ============================-->
@@ -124,32 +104,45 @@
   <!--  -->
   <!-- <div class="row" style="position: relative;"> -->
   <!--  -->
+
   <section id="pricing" class="padd-section text-center wow fadeInUp">
-
     <div class="container">
-      <div class="section-title text-center">
-
-        <h2 style="font-weight: normal;"> Our Plans </h2>
-        <!--<p class="separator" style="font-size: 22px; font-weight:normal; text-transform:none; color:darkgray">Select the most suitable plan of your choice</p> -->
-
+          <div class="section-title text-center">
+            <h2 style="font:45px Roboto, sans-serif margin:0px 0px 0px; font-weight: 400;"> Our Plans </h2>
+          </div>
+        </div>
+    <!--Pricing slider start-->
+    <div class="slider-container">
+    <!-- nav arrows -->
+    <div class="slider-arrows">
+      <div class="slider-arrow-left arrowLeft">
+        <svg width="16" height="30" class="svg-arrow">
+                <polyline style="stroke-linejoin:miter; stroke:#00275a; stroke-width:3; fill: none;" points="15 2, 2 15, 15 28" />
+              </svg>
+      </div>
+      <div class="slider-arrow-right arrowRight">
+        <svg width="16" height="30" class="svg-arrow">
+                <polyline style="stroke-linejoin:miter; stroke:#00275a; stroke-width:3; fill: none; color: red;" points="2 2, 14 15, 2 28" />
+              </svg>
       </div>
     </div>
-
-    <div class="container">
-      <div class="row">
-        {% for plandetail in plan %}
-        <div class="col-md-6 col-lg-3" style="margin-bottom:10px">
+    <div id="frame">
+      <div id="slider">
+    <!-- Box start -->
+    {% for plandetail in plan %}
+    <div class="slider-box slide">
+      <div class="slider-photo">
+          <div class="col-md-6 col-lg-3 padd-section text-center wow fadeInUp" id="pricing" style="margin: 25px; width: 290px; padding-top: 0px;">
           <div class="block-pricing">
-            <div class="table">
-              <h4>Monthy-PLan</h4>
-              <h2>Rs-{{plandetail.amount}}<small style="font-size:10px">+GST and Taxes</small></h2>
+            <div class="table" >
+               <h4>Monthy-PLan</h4>
+              <h2>Rs-950</h2>
               <ul class="list-unstyled">
-                <li><b>{{plandetail.title}}</b> Speed</li>
+                <li><b>25 mpbs</b> Speed</li>
                 <li><b>7/24</b> Tech Support</li>
                 <li><b>Data Per Month</b> Unlimited</li>
-                <li>{{plandetail.description}}</li>
-                <li>Free Router</li>
-                <li>Free Installation</li>
+                <li><b>Special Offer</b> NA</li>
+                
               </ul>
               <div class="table_btn">
                 <a href="#contact" class="btn"> Select</a>
@@ -157,16 +150,58 @@
             </div>
           </div>
         </div>
-        {% endfor %}
-        
+      </div>
     </div>
-  </section>
+        {% endfor %}
+    
+    <!-- Box end -->  
+  </div>
+</div>
+</div>
+    </section>
+    <!--Pricing slider end-->
+    
+    <!-- slider start from here -->
+    <h1 style="color:black; font-weight:400; font-style:bold; font: 45px Roboto,sans-serif" >ENTERTAINMENT</h1>
+ <div class="" style="margin: 0px 200px; " >
+<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="1500" id="myCarousel">
+  <div class="carousel-inner">
+    <div class="item active left">
+      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Amazonprime.png' %}" class="img-responsive" style="width: 350px; height: 450px; "></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Alt.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Hotstar.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/hungama.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/netflix.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Sonyliv.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
+    </div>
+    <div class="item">
+      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Zee5.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
+    </div>
+   
+    </div>
+  
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="color:#71C55D; margin: 0px;"><i class="glyphicon glyphicon-chevron-left"></i></a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next" style="color:#71C55D;"><i class="glyphicon glyphicon-chevron-right"></i></a>
+</div>
+</div>
+  <!--slider end here -->
+     
+     
 
-  <!--FAQ-->
-  <section id='faq' class="padd-section text-center wow fadeInUp">
-  <h1 style="color: black; font-weight:normal">FAQs</h1>
+  <!--FAQ-->>
+  <h1 style="color: black; font-weight:400 padding-top:100px; margin-top: 80px; margin-left: 0px; font: 45px Roboto, sans-serif;">FAQs</h1>
 
-  <div class="accordion">
+  <div class="accordion" >
     <div class="accordion-item">
       <div class="accordion-item-header">
         What is Hibird Broadband Service?
@@ -220,7 +255,6 @@
       </div>
     </div>
   </div>
-  </section>
   <!--  -->
   <!-- </div> -->
   <!--  -->
