@@ -206,6 +206,7 @@ footer {
           <div class="arrow"><div class="inner-arrow"><span>Customer ID:</span> {{customer_id}}</div></div>
           <div class="arrow"><div class="inner-arrow"><span>Name:</span> {{name}}</div></div>
           <div class="arrow"><div class="inner-arrow"><span>EMAIL:</span> <a href="mailto:john@example.com">{{email}}</a></div></div>
+          <div class="arrow"><div class="inner-arrow"><span>GST:</span> <a href="mailto:john@example.com">{{gst}}</a></div></div>
         </div>
           </td>
       
@@ -215,7 +216,8 @@ footer {
         <td align="right" style="margin: 0px; padding: 0px;">
           <div id="company">
           <div class="arrow back"><div class="inner-arrow">Village Bhiti Rawat Post Sahjanwa Dist. Gkp 273209 <span></span></div></div>
-          <div class="arrow back"><div class="inner-arrow">9044046862<span></span></div></div>
+          <div class="arrow back"><div class="inner-arrow">Contact:9044046862<span></span></div></div>
+          <div class="arrow back"><div class="inner-arrow">GST:09AAECH6840A1ZT<span></span></div></div>
           <div class="arrow back"><div class="inner-arrow"><a href="mailto:hibirdassociate@gmail.com">hibirdassociate@gmail.com</a> <span></span></div></div>
         </div>
         </td>
@@ -239,13 +241,12 @@ footer {
         </td>
       </tr>
       </table>
-      <table>
+      <table border="1">
         <thead>
           <tr>
             <th class="service">SERVICE</th>
             <th class="desc">DESCRIPTION</th>
             <th class="unit">PRICE</th>
-            <th class="qty">Month</th>
             <th class="total">TOTAL</th>
           </tr>
         </thead>
@@ -254,26 +255,23 @@ footer {
             <td class="service">Wifi Service Payment</td>
             <td class="desc">Bill Payment For {{month}} </td>
             <td class="unit">{{amount}} INR</td>
-            <td class="qty">1</td>
             <td class="total">{{amount}} INR</td>
           </tr>
            <tr>
             <td class="service">SGST</td>
-            <td class="desc">   @9    </td>
+            <td class="desc">   9%    </td>
             <td class="unit">{{nine_per}} INR</td>
-            <td class="qty"></td>
             <td class="total">{{nine_per}} INR</td>
           </tr>
            <tr>
             <td class="service">CGST</td>
-            <td class="desc">   @9   </td>
+            <td class="desc">   9%   </td>
             <td class="unit">{{nine_per}} INR</td>
-            <td class="qty"></td>
             <td class="total">{{nine_per}} INR</td>
           </tr>
       
           <tr>
-            <td colspan="4" class="grand total">GRAND TOTAL</td>
+            <td colspan="3" class="grand total">GRAND TOTAL</td>
             <td class="grand total">{{total}} INR</td>
           </tr>
         </tbody>
@@ -281,9 +279,9 @@ footer {
               </div>
     </main>
     <footer>
-      <img src="https://hybird.herokuapp.com/static/img/web_signature.jpg" alt="as" height="75" width="75"> 
+      <img style="text-align:right" src="https://hybird.herokuapp.com/static/img/web_signature.jpg" alt="as" height="75" width="75"> 
 
-      <p>Provider Signature</p>
+      <p style="text-align:right">Provider Signature</p>
       Invoice was created on a computer and is valid without the signature and seal.
     </footer>
   </body>
