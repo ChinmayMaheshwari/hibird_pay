@@ -171,6 +171,7 @@ def generateInvoice(request,tid=None):
 			return HttpResponse('Invalid Transaction')
 		profile = Profile.objects.get(user=user)
 		data = {
+		'id':transaction.id,
 		'customer_id':user.username,
 		'email':user.email,
 		'mobile_no':profile.mobile_no,
