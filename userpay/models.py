@@ -22,6 +22,7 @@ class Profile(models.Model):
 		return timezone.now()+timezone.timedelta(days=30)
 	user = models.OneToOneField(User,on_delete=models.CASCADE,verbose_name='UserID')
 	mobile_no = models.CharField(max_length=10)
+	gst = models.CharField(max_length=30,verbose_name='GST_No',blank=True,null=True)
 	current_plan = models.CharField(max_length=100,choices=packs,default=12)	
 	plan_amount = models.PositiveIntegerField()
 	address = models.TextField(blank=True,null=True)

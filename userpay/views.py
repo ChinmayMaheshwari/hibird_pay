@@ -52,7 +52,8 @@ class PersonalInfoView(APIView):
     	'amount':profile.plan_amount,  
     	'current_plan':profile.current_plan,
     	'renew_date':profile.due_date.strftime('%d-%b-%Y'),
-    	'available':(profile.due_date-date.today()).days
+    	'available':(profile.due_date-date.today()).days,
+    	'contact_no':9044046862
     	}
     	return Response(content)
 
@@ -175,14 +176,15 @@ def generateInvoice(request,tid=None):
 		'customer_id':user.username,
 		'email':user.email,
 		'mobile_no':profile.mobile_no,
-		'name':user.first_name,
+		'name':user.first_name+' '+user.last_name,
 		'date':transaction.date,
 		'due_date':profile.due_date,
 		'tran_id':transaction.payment_id,
 		'amount':profile.plan_amount-(profile.plan_amount*18)/100,
 		'month':profile.due_date.strftime('%B'),
 		'nine_per':(profile.plan_amount*9)/100,
-		'total':profile.plan_amount
+		'total':profile.plan_amount,
+		'gst':profile.gst if profile.gst else 'NA'
 		}
 		pdf = render_to_pdf('invoice.html',data)
 		if pdf:
