@@ -11,20 +11,36 @@
         style="width: 15px; height: 15px;border-radius: 100%;"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="2"
         style="width: 15px;height: 15px;border-radius: 100%;"></li>
+
+      <li data-target="#carouselExampleCaptions" data-slide-to="3"
+        style="width: 15px;height: 15px;border-radius: 100%;"></li>
     </ol>
     <div class="carousel-inner">
+
       <div class="carousel-item active">
-        <img src="{% static 'img/black.jpg' %}" style="height: 600px; width:1000px;" class="d-block w-100" alt="...">
+        <img src="media/{{slider1.photo}}" style="height: 800px; width:1000px;" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h1 style="margin-top: 5px;">Celebrating 3 Glorious Years</h1>
+          <h1 style="margin-top: 5px;">{% if slider1.title %}{{slider1.title}}{% endif %}</h1>
           <h2 style="color: white;">Welcome to Hibird Broadband Services</h2>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static 'img/11.jpg' %}" style="height: 600px;  width:1000px" class="d-block w-100" alt="...">
+        <img src="media/{{slider2.photo}}" style="height: 800px;  width:1000px" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 style="margin-top: 5px;">{% if slider2.title%}{{slider2.title}}{% endif %}</h1>
+        </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static 'img/3.jpg' %}" style="height: 600px;  width:1000px" class="d-block w-100" alt="...">
+        <img src="media/{{slider3.photo}}" style="height: 800px;  width:1000px" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 style="margin-top: 5px;">{% if slider3.title %}{{slider3.title}}{% endif %}</h1>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="media/{{slider4.photo}}" style="height: 800px;  width:1000px" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 style="margin-top: 5px;">{% if slider4.title %}{{slider4.title}}{% endif %}</h1>
+       </div>
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
@@ -135,13 +151,13 @@
           <div class="col-md-6 col-lg-3 padd-section text-center wow fadeInUp" id="pricing" style="margin: 25px; width: 290px; padding-top: 0px;">
           <div class="block-pricing">
             <div class="table" >
-               <h4>Monthy-PLan</h4>
-              <h2>Rs-950</h2>
+               <h4>{{plandetail.month_detail}}</h4>
+              <h2>Rs-{{plandetail.amount}}<small> + taxes</small></h2>
               <ul class="list-unstyled">
-                <li><b>25 mpbs</b> Speed</li>
+                <li><b>{{plandetail.speed_detail}} mpbs</b> Speed</li>
                 <li><b>7/24</b> Tech Support</li>
-                <li><b>Data Per Month</b> Unlimited</li>
-                <li><b>Special Offer</b> NA</li>
+                <li><b>Data Per Month</b> {{plandetail.data_per_month}}</li>
+                <li><b>Special Offer</b> {{plandetail.offer_detail}}</li>
                 
               </ul>
               <div class="table_btn">
@@ -164,9 +180,9 @@
     <!-- slider start from here -->
     <h1 style="color:black; font-weight:400; font-style:bold; font: 45px Roboto,sans-serif" >ENTERTAINMENT</h1>
  <div class="" style="margin: 0px 200px; " >
-<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="1500" id="myCarousel">
+<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="5000" id="myCarousel">
   <div class="carousel-inner">
-    <div class="item active left">
+     <div class="item active left">
       <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Amazonprime.png' %}" class="img-responsive" style="width: 350px; height: 450px; "></a></div>
     </div>
     <div class="item">
@@ -187,7 +203,7 @@
     <div class="item">
       <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Zee5.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
     </div>
-   
+  
     </div>
   
   <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="color:#71C55D; margin: 0px;"><i class="glyphicon glyphicon-chevron-left"></i></a>
@@ -300,23 +316,34 @@
 
         </div>
 
+         
         <div class="col-lg-5 col-md-8">
           <div class="form">
+             {% if request.GET.success %}
+            <p>Your message has been sent. Thank you!</p>
+          {% elif request.GET.fail %}
+            <p>There is Some Error Please Check Subject and Message Should Not be blank</p>
+          {% endif %}
             <div id="sendmessage">Your message has been sent. Thank you!</div>
             <div id="errormessage"></div>
-            <form action="" method="post" role="form" class="contactForm">
+            <form action="/contact/" method="post" role="form" class="contactForm">
+              {% csrf_token %}
               <div class="form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                <input type="text" name="contact_name" class="form-control" id="name" placeholder="Your Name"
                   data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
-                  data-rule="email" data-msg="Please enter a valid email" />
+                    <input type="tel" class="form-control" placeholder="Mobile No" 
+           name="contact_mobile"
+           id="phone_number"
+           pattern="^\d{10}$"
+           required="required"
+          data-msg="Please Enter a Valid Mobile No"/>
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="required" 
                   data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                 <div class="validation"></div>
               </div>

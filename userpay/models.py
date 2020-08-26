@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 # Create your models here.
-
 #from django.contrib.auth.models import AbstractUser
 # from django.dispatch import receiver
 # from django.db.models.signals import post_save
@@ -35,25 +34,10 @@ class Profile(models.Model):
 		return self.user.username
 
 class TransactionDetail(models.Model):
-	# month = (
-	# 	('January','January'),
-	# 	('February','February'),
-	# 	('March','March'),
-	# 	('April','April'),
-	# 	('May','May'),
-	# 	('June','June'),
-	# 	('July','July'),
-	# 	('August','August'),
-	# 	('September','September'),
-	# 	('Octomber','Octomber'),
-	# 	('November','November'),
-	# 	('December','December')
-	# 	)
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	order_id = models.CharField(max_length=50)
 	payment_id = models.CharField(max_length=50,blank=True,null=True)
 	date = models.DateTimeField(null=True,blank=True)
-	# payment_month = models.CharField(max_length=10,choices=month)
 	success = models.BooleanField(default=False)
 	amount = models.PositiveIntegerField(default=0)
 
@@ -76,6 +60,13 @@ class PlanDetail(models.Model):
 	def __str__(self):
 		return self.title
 
+class PlanDetailWeb(models.Model):
+	month_detail = models.CharField(max_length=20,default='Monthly')
+	amount = models.PositiveIntegerField()
+	speed_detail = models.PositiveIntegerField()
+	data_per_month = models.CharField(max_length=10,default='Unlimited')
+	offer_detail = models.CharField(max_length=50,default='NA')	
+
 class Slider(models.Model):
 	title = models.CharField(max_length=50)
 	photo = models.FileField(upload_to='slider/')
@@ -84,14 +75,12 @@ class Slider(models.Model):
 		return self.title
 
 class WebSlider(models.Model):
-	title = models.CharField(max_length=50)
+	title = models.CharField(max_length=50,blank=True,null=True)
 	photo = models.FileField(upload_to='slider/')
 
-	def __str__(self):
-		return self.title
 
 class Entertainment(models.Model):
-	title = models.CharField(max_length=50)
+	title = models.CharField(max_length=50,verbose_name='Link')
 	photo = models.FileField(upload_to='entertainment/')
 
 	def __str__(self):
@@ -102,3 +91,6 @@ class ContactFormData(models.Model):
 	contact_mobile = models.CharField(max_length=13)
 	subject = models.CharField(max_length=50)
 	message = models.TextField()
+
+	def __str__(self):
+		return self.subject

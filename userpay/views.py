@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from .serializers import *
 from .utils import render_to_pdf
-
+from .forms import ContactForm
 class SliderView(viewsets.ModelViewSet):
 	queryset = Slider.objects.all()
 	serializer_class = SliderSerializer
@@ -101,8 +101,17 @@ class PaymentInfoView(APIView):
 			return Response({'transaction':False})
 
 def index(request):
-	plan = PlanDetail.objects.all()
-	return render(request,'index.html',{'plan':plan})
+	dic = {}
+	dic['plan'] = PlanDetailWeb.objects.all()
+	try:
+		slider = WebSlider.objects.all().order_by('-id')[:4]
+		dic['slider1']=slider[0]
+		dic['slider2']=slider[1]
+		dic['slider3']=slider[2]
+		dic['slider4']=slider[3]
+	except:
+		pass
+	return render(request,'index.html',dic)
 
 def about(request):
 	return render(request,'about.html')
@@ -199,3 +208,14 @@ def generateInvoice(request,tid=None):
 		# return HttpResponse(pdf, content_type='application/pdf')
 	else:
 		return HttpResponseRedirect('/login/')
+
+def contactForm(request):
+	if request.method=="POST":
+		try:
+			contact = ContactForm(request.POST)
+			#if contact.is_validated():
+			contact.save()
+			return HttpResponseRedirect('/?success=True')
+		except:
+			pass
+	return HttpResponseRedirect('/?fail=True')

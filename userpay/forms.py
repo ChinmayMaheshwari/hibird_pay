@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from django.forms import ModelForm
+from .models import ContactFormData
 class UserCreateForm(UserCreationForm):
     """
     A UserCreationForm with optional password inputs.
@@ -22,3 +23,8 @@ class UserCreateForm(UserCreationForm):
         if bool(password1) ^ bool(password2):
             raise forms.ValidationError("Fill out both fields")
         return password2
+ 
+class ContactForm(ModelForm):
+    class Meta:
+        model = ContactFormData
+        fields = '__all__'
