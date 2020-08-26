@@ -102,7 +102,7 @@ class PaymentInfoView(APIView):
 
 def index(request):
 	dic = {}
-	dic['plan'] = PlanDetailWeb.objects.all()
+	dic['plan'] = PlanDetail.objects.all()
 	try:
 		slider = WebSlider.objects.all().order_by('-id')[:4]
 		dic['slider1']=slider[0]

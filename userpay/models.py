@@ -50,20 +50,13 @@ class TransactionDetail(models.Model):
 # 		instance.username = 'Hybrid'+str(instance.id)
 # 		instance.save()
 
+
 class PlanDetail(models.Model):
-	title = models.CharField(max_length=50)
-	amount = models.PositiveIntegerField()
-	description = models.TextField()
-	photo = models.FileField(null=True,blank=True,upload_to='plan/')
-	offer_detail = models.CharField(max_length=50,default='NA')
-
-	def __str__(self):
-		return self.title
-
-class PlanDetailWeb(models.Model):
+	title = models.CharField(max_length=20,default='Base')
 	month_detail = models.CharField(max_length=20,default='Monthly')
 	amount = models.PositiveIntegerField()
-	speed_detail = models.PositiveIntegerField()
+	speed_detail = models.PositiveIntegerField(default=0)
+	description = models.TextField()
 	data_per_month = models.CharField(max_length=10,default='Unlimited')
 	offer_detail = models.CharField(max_length=50,default='NA')	
 
@@ -78,13 +71,6 @@ class WebSlider(models.Model):
 	title = models.CharField(max_length=50,blank=True,null=True)
 	photo = models.FileField(upload_to='slider/')
 
-
-class Entertainment(models.Model):
-	title = models.CharField(max_length=50,verbose_name='Link')
-	photo = models.FileField(upload_to='entertainment/')
-
-	def __str__(self):
-		return self.title
 
 class ContactFormData(models.Model):
 	contact_name = models.CharField(max_length=50)
