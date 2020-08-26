@@ -32,7 +32,7 @@ class TransactionView(viewsets.ModelViewSet):
 	def get_queryset(self):
 		user =self.request.user
 		print(user.username)
-		return self.queryset.filter(user=user)
+		return self.queryset.filter(user=user).order_by('-date')
 
 class PersonalInfoView(APIView):
     permission_classes = [IsAuthenticated]
@@ -123,7 +123,7 @@ def profile(request):
 		profile = Profile.objects.get(user=user)
 	except:
 		return HttpResponseRedirect('/login/')
-	transaction = TransactionDetail.objects.filter(user=user).order_by('-date')
+	transaction = TransactionDetail.objects.filter(user=user).exclude(payment_id=None).order_by('-date')
 	return render(request,'profile.html',{'user':user,'profile':profile,'transaction':transaction,'available':(profile.due_date-date.today()).days})
 
 def payment(request):
