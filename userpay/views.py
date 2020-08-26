@@ -168,6 +168,8 @@ def payment(request):
 
 
 def generateInvoice(request,tid=None):
+	from weasyprint import HTML, CSS
+	from django.template.loader import get_template
 	token = request.GET.get('token')
 	user = request.user
 	if token:
@@ -195,16 +197,21 @@ def generateInvoice(request,tid=None):
 		'total':profile.plan_amount,
 		'gst':profile.gst if profile.gst else 'NA'
 		}
-		pdf = render_to_pdf('invoice.html',data)
-		if pdf:
-			response = HttpResponse(pdf, content_type='application/pdf')
-			filename = "Invoice.pdf"
-			content = "inline; filename='Invoice.pdf'"
-			download = request.GET.get("download")
-			if download:
-			    content = "attachment; filename='Invoice.pdf'"
-			response['Content-Disposition'] = content
-			return response
+		html_template = get_template('invoice.html').render(data)
+		pdf_file = HTML(string=html_template).write_pdf()
+		response = HttpResponse(pdf_file, content_type='application/pdf')
+		response['Content-Disposition'] = 'filename="in.pdf"'
+		return response
+		# pdf = render_to_pdf('invoice.html',data)
+		# if pdf:
+		# 	response = HttpResponse(pdf, content_type='application/pdf')
+		# 	filename = "Invoice.pdf"
+		# 	content = "inline; filename='Invoice.pdf'"
+		# 	download = request.GET.get("download")
+		# 	if download:
+		# 	    content = "attachment; filename='Invoice.pdf'"
+		# 	response['Content-Disposition'] = content
+		# 	return response
 		# return HttpResponse(pdf, content_type='application/pdf')
 	else:
 		return HttpResponseRedirect('/login/')
