@@ -18,8 +18,31 @@ from .forms import ContactForm
 RAZORPAY_PUBLICKEY = 'rzp_test_gRPiCKGFiZqfz3'
 RAZORPAY_PRIVATEKEY = 'Px4TjJH8yq5bipqdPEILY35a'
 client = razorpay.Client(auth=(RAZORPAY_PUBLICKEY,RAZORPAY_PRIVATEKEY))
+
+class SliderView(viewsets.ModelViewSet):
+	queryset = Slider.objects.all()
+	serializer_class = SliderSerializer
+	http_method_names = ['get']	
+
+class PlanView(viewsets.ModelViewSet):
+	queryset = PlanDetail.objects.all()
+	serializer_class = PlanSerializer
+	http_method_names = ['get']	
+
+class TransactionView(viewsets.ModelViewSet):
+	queryset = TransactionDetail.objects.all()
+	serializer_class = TransactionDetailSerializer
+	http_method_names = ['get']	
+	permission_classes = [IsAuthenticated]
+
+	def get_queryset(self):
+		user =self.request.user
+		print(user.username)
+		return self.queryset.filter(user=user).exclude(payment_id=None,cash_payment=True).order_by('-date')
+
 class PersonalInfoView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request):
     	user = request.user
     	try:
@@ -33,7 +56,7 @@ class PersonalInfoView(APIView):
     	'email': user.email,  
     	'mobile_no': profile.mobile_no,
     	'amount':profile.plan_amount,  
-    	'current_plan':profile.current_plan,
+    	'current_plan':profile.current_plan.title,
     	'renew_date':profile.due_date.strftime('%d-%b-%Y'),
     	'available':(profile.due_date-date.today()).days,
     	'contact_no':9044046862#Enviroment Variable
@@ -211,24 +234,3 @@ def contactForm(request):
 			pass
 	return HttpResponseRedirect('/?fail=True')
 
-
-class SliderView(viewsets.ModelViewSet):
-	queryset = Slider.objects.all()
-	serializer_class = SliderSerializer
-	http_method_names = ['get']	
-
-class PlanView(viewsets.ModelViewSet):
-	queryset = PlanDetail.objects.all()
-	serializer_class = PlanSerializer
-	http_method_names = ['get']	
-
-class TransactionView(viewsets.ModelViewSet):
-	queryset = TransactionDetail.objects.all()
-	serializer_class = TransactionDetailSerializer
-	http_method_names = ['get']	
-	permission_classes = [IsAuthenticated]
-
-	def get_queryset(self):
-		user =self.request.user
-		print(user.username)
-		return self.queryset.filter(user=user).exclude(payment_id=None,cash_payment=True).order_by('-date')

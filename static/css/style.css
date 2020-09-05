@@ -321,7 +321,7 @@ font-family: 'Nunito Sans', sans-serif;
 #contact .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #71c55d;
+  /*background: #71c55d;*/
   color: #fff;
   line-height: 1;
   padding: 6px 0 8px 0;
