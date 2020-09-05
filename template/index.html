@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
+{% load batch %}
   <!-- slider start from here -->
  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -123,51 +123,22 @@
 <!-- Plans end -->
 
 <!-- Entertainment -->
-
     <div class="container sub-container1">
           <div class="section-title">
             <h2 style="font:45px Roboto, sans-serif margin:0px 0px 0px; font-weight: 400;"> Entertainment </h2>
           </div>
-
-    
+{% if enter %}
+    <div class="web-entertainment">
     <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
         <div class="carousel-inner w-100" style="height: auto;" role="listbox">
-            <div class="carousel-item row no-gutters active">
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-            </div>
-            <div class="carousel-item row no-gutters">
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-            </div>
-            <div class="carousel-item row no-gutters">
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-            </div>
-            <div class="carousel-item row no-gutters">
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-            </div>
-            <div class="carousel-item row no-gutters">
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-            </div>
-            <div class="carousel-item row no-gutters">
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
-            </div>
+          {% for ent in enter|batch:4 %}
+            <div class="carousel-item row no-gutters{% if forloop.first %} active{% endif %}">
+              {% for element in ent %}
+                <div class="col-3 float-left ent-img" ><img class="" src="media/{{element.photo}}"></div>
+                {% endfor %}
+              </div>
+              {% endfor %}
+                
         </div>
         <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -178,9 +149,34 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    </div>
+    {% endif %}
+
+    <div class="mobile-entertainment">
+    <div id="recipeCarousel1" class="carousel slide w-100" data-ride="carousel">
+        <div class="carousel-inner w-100" style="height: auto;" role="listbox">
+          {% for ent in enter %}
+            <div class="carousel-item no-gutters{% if forloop.first %} active{% endif %}">
+                <div class="float-left ent-img" ><img class="" src="media/{{ent.photo}}"></div>
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#recipeCarousel1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#recipeCarousel1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    </div>
 
 </div>
 <!-- Entertainment end -->
+
+
+
 
 <!-- FAQ -->
 
@@ -248,8 +244,9 @@
 
 
 <!-- CONTACT -->
+
 <section id="contact">
-  <div class="container sub-container1">
+<div class="container sub-container1">
             <div class="section-title">
             <h2 style="font-weight: normal;"> Contact </h2>
           </div>
@@ -281,14 +278,11 @@
          
         <div class="col-lg-5 col-md-8"><grammarly-extension class="_1KJtL" style="position: absolute; top: 0px; left: 0px; pointer-events: none;"></grammarly-extension>
           <div class="form">
-          {% if request.GET.success %}
-            <p>Your message has been sent. Thank you!</p>
-          {% elif request.GET.fail %}
-            <p>There is Some Error Please Try Again</p>
-          {% endif %}
-          
+             
+            {% if request.GET.success %}<p id="sendmessage">Your message has been sent. Thank you!</p>{% endif %}
+            {% if request.GET.fail %}<p>There is Some Error Please Try Again</p>{% endif %}
             <form action="/contact/" method="post" role="form" class="contactForm" _lpchecked="1">
-              {% csrf_token %}
+             {% csrf_token %}
               <div class="form-group">
                 <input type="text" name="contact_name" class="form-control form1" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
                 <div class="validation"></div>
@@ -311,6 +305,7 @@
         </div>
       </div>
     </div>
+
   </section>
 <!-- CONTACT END -->
 <!-- get it on PS -->

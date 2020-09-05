@@ -24,9 +24,9 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    # path('admin/password_reset/',
-    # auth_views.PasswordResetView.as_view(),
-    # name='admin_password_reset'),
+    path('admin/password_reset/',
+    auth_views.PasswordResetView.as_view(),
+    name='admin_password_reset'),
     path(
     'admin/password_reset/done/',
     auth_views.PasswordResetDoneView.as_view(),
@@ -41,8 +41,8 @@ urlpatterns = [
     name='password_reset_complete'),
     path('password_reset/',auth_views.PasswordResetView.as_view(
             template_name='login.html',
-            success_url = '/login/?success=Password reset link sent to your given email id'
-        ),name='change_password'),
+            success_url = '/login/?success=Password reset link sent to your given email id'),
+    name='change_password'),
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
     path('about/',views.about,name='about'),

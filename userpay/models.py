@@ -67,12 +67,14 @@ class Slider(models.Model):
 	def __str__(self):
 		return self.title
 
-# class WebSlider(models.Model):
-# 	title = models.CharField(max_length=50,blank=True,null=True)
-# 	photo = models.FileField(upload_to='slider/')
+class WebSlider(models.Model):
+	title = models.CharField(max_length=50,blank=True,null=True)
+	photo = models.FileField(upload_to='slider/')
 
-# 	def __str__(self):
-# 		return self.title
+class Entertainment(models.Model):
+	title = models.CharField(max_length=50,blank=True,null=True)
+	photo = models.FileField(upload_to='entertainment/')
+
 
 class ContactFormData(models.Model):
 	contact_name = models.CharField(max_length=50)

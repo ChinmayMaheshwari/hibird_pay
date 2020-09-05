@@ -42,35 +42,44 @@
           <br>
           <a href="/payment/"><button class="paynow-btn text-left" >PAY NOW</button></a>
         </div>
-        <div class="pf-trans">
+         <div class="pf-trans">
           <br>
           <h3> Transactions </h3>
           <!-- <h3> No Transaction</h3> -->
-
           <br>
-          <table>
-             
-            <tr>
-              <td><b>ID</b></td>
-              <td><b>Status</b></td>
-              <td><b>Price</b></td>
-              <td><b>Date</b></td>
-              <td><b>Check</b></td>
-            </tr>
-            {% for tran in transaction %}
-            <tr>
-              <td>{{tran.payment_id}}</td>
-              <td>{% if tran.success %} Success{% else %} Fail{% endif %}</td>
-              <td>{{tran.amount}} ₹</td>
-              <td>{{tran.date}}</td>
-              <td><a href="#">View</a></td>
-            </tr>
-            {% endfor %}
-          </table>
+          <div style="overflow-x: overlay;">
             
-        </div>
-      </div>
-    </div>
-  </div>
+          <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Status</th>
+      <th scope="col">Prics</th>
+      <th scope="col">Date</th>
+      <th scope="col">Check</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    {% for tran in transaction %}
+             <tr>
+      <td><div class="threedots">{{tran.payment_id}}</div></td>
+      <td><div class="threedots">{% if tran.success %} Success{% else %} Fail{% endif %}</div></td>
+      <td><div class="threedots">{{tran.amount}} ₹</div></</td>
+      <td><div class="threedots">{{tran.date}}</div></td>
+      <td><div class="threedots"><a href="/invoice/{{tran.id}}">View</a></div></</td>
+    </tr>
+    {% endfor %}
+
+
+  </tbody>
+</table>
+
+          </div>
+
+          
+
+         </div>
+        
 
 {% endblock content %}

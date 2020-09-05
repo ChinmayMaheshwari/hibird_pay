@@ -40,7 +40,10 @@ class ProfileAdmin(admin.ModelAdmin):
         for i in users:
             message = 'Hello '+i.user.first_name+',This is to remind you your wifi services are going to expire on '+str(i.due_date)+' please pay your due to continue our services. use https://hybird.herokuapp.com for paying your dues'
             if i.user.email:
-                send_mail('Hibird Payment Remider',message,'chinmay1305@gmail.com',[i.user.email,]) 
+                try:
+                    send_mail('Hibird Payment Remider',message,'chinmay1305@gmail.com',[i.user.email,])
+                except:
+                    pass 
             if i.mobile_no:
                 r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=HIBIRD&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+i.mobile_no+'&text='+message+'&route=02')
                 print(r.status_code)
@@ -105,7 +108,8 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(PlanDetail)
 admin.site.register(Slider)
-#admin.site.register(WebSlider)
+admin.site.register(WebSlider)
+admin.site.register(Entertainment)
 admin.site.register(ContactFormData)
 admin.site.site_header = "Hibird Panel"
 admin.site.site_title = "Hibird "
