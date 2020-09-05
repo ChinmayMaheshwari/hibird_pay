@@ -10,11 +10,10 @@
 	</style>
 </head>
 <body>
-	<div style="background-color:black;">
+	<div style="background-color:#000030;">
 		<div style="display:flex;width:100%;">
-			<div style="width:50%;text-align:center;float:left;display:inline;padding:50px;">
-				<img src="https://hybird.herokuapp.com/static/img/icon.png" height='50px' width="100px" alt="logo"></img>
-				<h1 style="color:white;float:right">Invoice {{id}}</h1>
+			<div style="width:50%;text-align:center;float:left;display:inline;">
+				<img src="https://hybird.herokuapp.com/static/img/icon.png" height="100px"  alt="logo"></img>
 			</div>
 			<div style="width:50%;float:right;text-align:right;padding-right:50px;margin-top:20px;">
 				<h1 style="color:yellow;margin-bottom:0px;font-size:20px;">Hibird Associates</h1>
@@ -31,47 +30,46 @@
 				<p style="color:white;font-size:10px;">Payment Mode: Online</p>
 				<p style="color:white;font-size:10px;">Transaction ID: {{tran_id}}</p>
 			</div>
-			<div style="width:50%;float:right;text-align:right;padding-right:50px;margin-top:50px;">
-				<p style="margin-right:50%;color:white;font-size:15px;">Bill To:</p>
-				<p style="margin-right:40%;color:white;font-size:10px;">{{name}}</p>
-				<p style="margin-right:40%;color:white;font-size:10px;">{{gst}}</p>
-				<p style="margin-right:40%;color:white;font-size:10px;">{{mobile_no}}</p>
-				<p style="margin-right:10%;color:white;font-size:10px;">{{email}}</p>
+			<div style="width:50%;float:right;text-align:left;padding-right:50px;margin-top:50px;">
+				<p style="margin-right:40%;color:white;font-size:10px;">Name : {{name}}</p>
+				<p style="margin-right:40%;color:white;font-size:10px;">GST : {{gst}}</p>
+				<p style="margin-right:40%;color:white;font-size:10px;">Mobile No : {{mobile_no}}</p>
+				<p style="margin-right:10%;color:white;font-size:10px;">Email : {{email}}</p>
 			</div>
 		</div>
 	</div>
 	<table style="width:100%;padding:10px">
         <thead>
           <tr>
-            <th style="background-color:#6eb465;color:white;" class="service">SERVICE</th>
-            <th style="background-color:#6eb465;color:white;" class="desc">DESCRIPTION</th>
-            <th style="background-color:#6eb465;color:white;" class="unit">PRICE</th>
-            <th style="background-color:#6eb465;color:white;" class="total">TOTAL</th>
+            <th style="background-color:#6eb465;color:white;text-align:center;" class="service">SERVICE</th>
+            <th style="background-color:#6eb465;color:white;text-align:center;" class="desc">DESCRIPTION</th>
+            <th style="background-color:#6eb465;color:white;text-align:center;" class="unit">PRICE</th>
+            <th style="background-color:#6eb465;color:white;text-align:center;" class="total">TOTAL</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="service">Wifi Service Payment</td>
             <td class="desc">Bill Payment For {{month}} </td>
-            <td class="unit">{{amount}} INR</td>
-            <td class="total">{{amount}} INR</td>
+            <td class="unit">{{amount}}  ₹</td>
+            <td class="total">{{amount}}  ₹</td>
           </tr>
            <tr>
             <td class="service">SGST</td>
             <td class="desc">   9%    </td>
-            <td class="unit">{{nine_per}} INR</td>
-            <td class="total">{{nine_per}} INR</td>
+            <td>{{nine_per}} ₹</td>
+            <td class="total">{{nine_per}}  ₹</td>
           </tr>
            <tr>
             <td class="service">CGST</td>
             <td class="desc">   9%   </td>
-            <td class="unit">{{nine_per}} INR</td>
-            <td class="total">{{nine_per}} INR</td>
+            <td class="unit">{{nine_per}}  ₹</td>
+            <td class="total">{{nine_per}}  ₹</td>
           </tr>
       
           <tr>
             <td colspan="3" style="color:red;font-weight:bold;text-align:right;">GRAND TOTAL:</td>
-            <td class="grand total">{{total}} INR</td>
+            <td class="grand total">{{total}}  ₹</td>
           </tr>
         </tbody>
       </table>
@@ -79,7 +77,7 @@
       <img style="float:right;margin-right:80px;margin-top:50px;" src="https://hybird.herokuapp.com/static/img/web_signature.jpg" alt="as" height="75" width="75"> 
       	<div style="clear: right">
    		</div>    
-      <p style="text-align:right;margin-right:60px;">Provider Signature</p>
+      <p style="text-align:right;margin-right:45px;">Provider Signature</p>
       <p style="margin:20px;">Invoice was created on a computer and is valid without the signature and seal.</p>
     </footer>
 </body>

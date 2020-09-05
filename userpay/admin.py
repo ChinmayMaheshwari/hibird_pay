@@ -105,7 +105,7 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(PlanDetail)
 admin.site.register(Slider)
-admin.site.register(WebSlider)
+#admin.site.register(WebSlider)
 admin.site.register(ContactFormData)
 admin.site.site_header = "Hibird Panel"
 admin.site.site_title = "Hibird "

@@ -3,154 +3,100 @@
 {% block content %}
 
   <!-- slider start from here -->
-  <div id="carouselExampleCaptions" class="carousel slide mt-0" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"
-        style="width: 15px; height: 15px; border-radius: 100%;"></li>
-      <li data-target="#carouselExampleCaptions" data-slide-to="1"
-        style="width: 15px; height: 15px;border-radius: 100%;"></li>
-      <li data-target="#carouselExampleCaptions" data-slide-to="2"
-        style="width: 15px;height: 15px;border-radius: 100%;"></li>
-
-      <li data-target="#carouselExampleCaptions" data-slide-to="3"
-        style="width: 15px;height: 15px;border-radius: 100%;"></li>
-    </ol>
-    <div class="carousel-inner">
-
-      <div class="carousel-item active">
-        <img src="media/{{slider1.photo}}" style="height: 800px; width:1000px;" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h1 style="margin-top: 5px;">{% if slider1.title %}{{slider1.title}}{% endif %}</h1>
-          <h2 style="color: white;">Welcome to Hibird Broadband Services</h2>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="media/{{slider2.photo}}" style="height: 800px;  width:1000px" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h1 style="margin-top: 5px;">{% if slider2.title%}{{slider2.title}}{% endif %}</h1>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="media/{{slider3.photo}}" style="height: 800px;  width:1000px" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h1 style="margin-top: 5px;">{% if slider3.title %}{{slider3.title}}{% endif %}</h1>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="media/{{slider4.photo}}" style="height: 800px;  width:1000px" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h1 style="margin-top: 5px;">{% if slider4.title %}{{slider4.title}}{% endif %}</h1>
-       </div>
-      </div>
+ <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    {% for slider in sliders %}
+    <div class="carousel-item{% if forloop.first %} active{% endif %}">
+      <img src="media/{{slider.photo}}" class="d-block w-100" src="..." alt="First slide">
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    {% endfor %}
   </div>
-  <!-- slider end here -->
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
-  <!--==========================
-    Features Section
-  ============================-->
-
-  <!--  -->
-  <div class="row" style="position: relative;">
-    <div class="col">
-      <!--  -->
-
-      <section id="features" class="padd-section text-center wow fadeInUp mt-4">
-
-        <div class="container">
-          <div class="section-title text-center">
+<!-- Slider end -->
+<!-- Features -->
+<section id="features">
+     <div class="container sub-container1" style="margin-top: 50px;">
+        <div class="section-title">
             <h2 style="font-weight: normal;"> Why HIBIRD BroadBand Service </h2>
           </div>
-        </div>
-
-        <div class="container">
-          <div class="row">
+          <div class="row text-center">
 
             <div class="col-md-6 col-lg-3">
               <div class="feature-block">
-                <img src="{% static 'img/svg/net.svg' %}" alt="img" class="img-fluid">
-                <h4>Dependable <br> Network</h4>
+                <img src="{% static 'img/net.svg' %}" alt="img" class="img-fluid">
+                <h4 class="card-text"> Dependable <br> Network</h4>
 
               </div>
             </div>
 
             <div class="col-md-6 col-lg-3">
               <div class="feature-block">
-                <img src="{% static 'img/svg/bb.svg' %}" alt="img" class="img-fluid">
-                <h4>24X7 Promised <br> Speed</h4>
+                <img src="{% static 'img/bb.svg' %}" alt="img" class="img-fluid">
+                <h4 class="card-text"> 24X7 Promised <br> Speed</h4>
 
               </div>
             </div>
 
             <div class="col-md-6 col-lg-3">
               <div class="feature-block">
-                <img src="{% static 'img/svg/support.svg' %}" alt="img" class="img-fluid">
-                <h4>24X7 Customer <br> Support</h4>
+                <img src="{% static 'img/support.svg' %}" alt="img" class="img-fluid">
+                <h4 class="card-text"> 24X7 Customer <br> Support</h4>
 
               </div>
             </div>
 
             <div class="col-md-6 col-lg-3">
               <div class="feature-block">
-                <img src="{% static 'img/svg/app.svg' %}" alt="img" class="img-fluid">
-                <h4>App Store <br> Support</h4>
-
+                <img src="{% static 'img/app.svg' %}" alt="img" class="img-fluid">
+                <h4 class="card-text"> App Store <br> Support</h4>
               </div>
             </div>
           </div>
         </div>
       </section>
+<!-- Features end -->
 
-      <!--  -->
-    </div>
-  </div>
-  <!--  -->
+<!-- Plans -->
 
-  <!--==========================
-    Pricing Table Section
-  ============================-->
-  <!--  -->
-  <!-- <div class="row" style="position: relative;"> -->
-  <!--  -->
-
-  <section id="pricing" class="padd-section text-center wow fadeInUp">
-    <div class="container">
-          <div class="section-title text-center">
-            <h2 style="font:45px Roboto, sans-serif margin:0px 0px 0px; font-weight: 400;"> Our Plans </h2>
+    <div class="container  sub-container1">
+          <div class="section-title">
+            <h2 style="font:45px Roboto, sans-serif margin 0px 0px 0px; font-weight: 400"> Our Plans </h2>
           </div>
-        </div>
+
+  
     <!--Pricing slider start-->
     <div class="slider-container">
     <!-- nav arrows -->
     <div class="slider-arrows">
       <div class="slider-arrow-left arrowLeft">
         <svg width="16" height="30" class="svg-arrow">
-                <polyline style="stroke-linejoin:miter; stroke:#00275a; stroke-width:3; fill: none;" points="15 2, 2 15, 15 28" />
+                <polyline style="stroke-linejoin:miter; stroke:#00275a; stroke-width:3; fill: none;" points="15 2, 2 15, 15 28"></polyline>
               </svg>
       </div>
       <div class="slider-arrow-right arrowRight">
         <svg width="16" height="30" class="svg-arrow">
-                <polyline style="stroke-linejoin:miter; stroke:#00275a; stroke-width:3; fill: none; color: red;" points="2 2, 14 15, 2 28" />
+                <polyline style="stroke-linejoin:miter; stroke:#00275a; stroke-width:3; fill: none; color: red;" points="2 2, 14 15, 2 28"></polyline>
               </svg>
       </div>
     </div>
-    <div id="frame">
-      <div id="slider">
+    <div id="frame" class="frame">
+      <div id="slider" class="slider">
     <!-- Box start -->
-    {% for plandetail in plan %}
-    <div class="slider-box slide">
+    {% for plandetail in plans %}
+    <div class="slider-box{% if forloop.first %} slide{% else %} slide1{% endif %}">
       <div class="slider-photo">
-          <div class="col-md-6 col-lg-3 padd-section text-center wow fadeInUp" id="pricing" style="margin: 25px; width: 290px; padding-top: 0px;">
+          <div class="col-md-6 col-lg-3 padd-section text-center wow fadeInUp" id="pricing" style="margin: 25px; width: 290px; padding-top: 0px; visibility: visible; animation-name: fadeInUp;">
           <div class="block-pricing">
-            <div class="table" >
+            <div class="table">
                <h4>{{plandetail.month_detail}}</h4>
               <h2>Rs-{{plandetail.amount}}<small> + taxes</small></h2>
               <ul class="list-unstyled">
@@ -160,8 +106,8 @@
                 <li><b>Special Offer</b> {{plandetail.offer_detail}}</li>
                 
               </ul>
-              <div class="table_btn">
-                <a href="#contact" class="btn"> Select</a>
+              <div class="no-link">
+                <a href="#contact" class="login-btn"> Select</a>
               </div>
             </div>
           </div>
@@ -169,55 +115,82 @@
       </div>
     </div>
         {% endfor %}
-    
     <!-- Box end -->  
   </div>
 </div>
 </div>
-    </section>
-    <!--Pricing slider end-->
+  </div>
+<!-- Plans end -->
+
+<!-- Entertainment -->
+
+    <div class="container sub-container1">
+          <div class="section-title">
+            <h2 style="font:45px Roboto, sans-serif margin:0px 0px 0px; font-weight: 400;"> Entertainment </h2>
+          </div>
+
     
-    <!-- slider start from here -->
-    <h1 style="color:black; font-weight:400; font-style:bold; font: 45px Roboto,sans-serif" >ENTERTAINMENT</h1>
- <div class="" style="margin: 0px 200px; " >
-<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="5000" id="myCarousel">
-  <div class="carousel-inner">
-     <div class="item active left">
-      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Amazonprime.png' %}" class="img-responsive" style="width: 350px; height: 450px; "></a></div>
+    <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+        <div class="carousel-inner w-100" style="height: auto;" role="listbox">
+            <div class="carousel-item row no-gutters active">
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+            </div>
+            <div class="carousel-item row no-gutters">
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+            </div>
+            <div class="carousel-item row no-gutters">
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+            </div>
+            <div class="carousel-item row no-gutters">
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+            </div>
+            <div class="carousel-item row no-gutters">
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+            </div>
+            <div class="carousel-item row no-gutters">
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+                <div class="col-3 float-left ent-img" ><img class="" src="{% static 'img/sli.png' %}"></div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    <div class="item">
-      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Alt.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
-    </div>
-    <div class="item">
-      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Hotstar.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
-    </div>
-    <div class="item">
-      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/hungama.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
-    </div>
-    <div class="item">
-      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/netflix.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
-    </div>
-    <div class="item">
-      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Sonyliv.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
-    </div>
-    <div class="item">
-      <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="{% static 'img/seriesbanners/Zee5.png' %}" class="img-responsive" style="width: 350px; height: 450px;"></a></div>
-    </div>
-  
-    </div>
-  
-  <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="color:#71C55D; margin: 0px;"><i class="glyphicon glyphicon-chevron-left"></i></a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next" style="color:#71C55D;"><i class="glyphicon glyphicon-chevron-right"></i></a>
-</div>
-</div>
-  <!--slider end here -->
-     
-     
 
-  <!--FAQ-->>
-  <h1 style="color: black; font-weight:400 padding-top:100px; margin-top: 80px; margin-left: 0px; font: 45px Roboto, sans-serif;">FAQs</h1>
+</div>
+<!-- Entertainment end -->
 
-  <div class="accordion" >
+<!-- FAQ -->
+
+    <div class="container sub-container1">
+          <div class="section-title">
+            <h2 style="font:45px Roboto, sans-serif margin:0px 0px 0px; font-weight: 400;"> FAQs</h2>
+          </div>
+
+    
+<div class="accordion">
     <div class="accordion-item">
       <div class="accordion-item-header">
         What is Hibird Broadband Service?
@@ -264,101 +237,191 @@
       </div>
       <div class="accordion-item-body">
         <div class="accordion-item-body-content">
-          Customers can visit the contact page on our website or write to us at <span
-            style="color:red;">hibirdassociate@gmail.com</span> or contact us at <span
-            style="color: red;">9198911007</span>.
+          Customers can visit the contact page on our website or write to us at <span style="color:red;">hibirdassociate@gmail.com</span> or contact us at <span style="color: red;"> 9198911007</span>.
         </div>
       </div>
     </div>
   </div>
-  <!--  -->
-  <!-- </div> -->
-  <!--  -->
-  <!--==========================
-    Contact Section
-  ============================-->
-  <section id="contact" class="padd-section wow fadeInUp">
 
-    <div class="container">
-      <div class="section-title text-center">
-        <h2 style="font-weight: normal;">Contact Us</h2>
-      </div>
-    </div>
+  </div>
+<!-- FAQ end-->
 
-    <div class="container">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container sub-container1">
+            <div class="section-title">
+            <h2 style="font-weight: normal;"> Contact </h2>
+          </div>
       <div class="row justify-content-center">
 
         <div class="col-lg-3 col-md-4">
 
           <div class="info">
-            <div>
-              <i class="fa fa-map-marker"></i>
-              <p>Write<br>Address Here </p>
-            </div>
-
+            
             <div class="email">
-              <i class="fa fa-envelope"></i>
-              <p>hibirdassociate@gmail.com</p>
+              <ion-icon name="mail-outline"></ion-icon> hibirdassociate@gmail.com
             </div>
 
-            <div>
-              <i class="fa fa-phone"></i>
-              <p> 9198911007 </p>
+            <div style="margin-top: 10px;">
+            <ion-icon name="call-outline"></ion-icon> +91-9198911007
+              
             </div>
           </div>
 
-          <div class="social-links">
+          <div class="social-links" style="text-decoration: none; color: #3a3a3a; margin-top: 15px">
 
-            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="facebook" style="text-decoration: none; color: #3a3a3a;margin-right: 5px"><ion-icon name="logo-facebook" size="large"></ion-icon></a>
+            <a href="#" class="instagram" style="text-decoration: none; color: #3a3a3a;margin-right: 5px"><ion-icon name="logo-instagram" size="large"></ion-icon></i></a>
 
           </div>
 
         </div>
 
          
-        <div class="col-lg-5 col-md-8">
+        <div class="col-lg-5 col-md-8"><grammarly-extension class="_1KJtL" style="position: absolute; top: 0px; left: 0px; pointer-events: none;"></grammarly-extension>
           <div class="form">
-             {% if request.GET.success %}
+          {% if request.GET.success %}
             <p>Your message has been sent. Thank you!</p>
           {% elif request.GET.fail %}
-            <p>There is Some Error Please Check Subject and Message Should Not be blank</p>
+            <p>There is Some Error Please Try Again</p>
           {% endif %}
-            <div id="sendmessage">Your message has been sent. Thank you!</div>
-            <div id="errormessage"></div>
-            <form action="/contact/" method="post" role="form" class="contactForm">
+          
+            <form action="/contact/" method="post" role="form" class="contactForm" _lpchecked="1">
               {% csrf_token %}
               <div class="form-group">
-                <input type="text" name="contact_name" class="form-control" id="name" placeholder="Your Name"
-                  data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <input type="text" name="contact_name" class="form-control form1" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-                    <input type="tel" class="form-control" placeholder="Mobile No" 
-           name="contact_mobile"
-           id="phone_number"
-           pattern="^\d{10}$"
-           required="required"
-          data-msg="Please Enter a Valid Mobile No"/>
+                    <input type="tel" class="form-control form1" placeholder="Mobile No" name="contact_mobile" id="phone_number" pattern="^\d{10}$" required="required" data-msg="Please Enter a Valid Mobile No">
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="required" 
-                  data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <input type="text" class="form-control form1" name="subject" id="subject" placeholder="Subject" required="required" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
                 <div class="validation"></div>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required"
-                  data-msg="Please write something for us" placeholder="Message"></textarea>
+                <textarea class="form-control form1" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message" spellcheck="false"></textarea>
                 <div class="validation"></div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class=""><button type="submit" class="login-btn">Send Message</button></div>
             </form>
           </div>
         </div>
       </div>
     </div>
-  </section><!-- #contact -->
-<script src="{% static 'js/main.js' %}"></script>
+  </section>
+<!-- CONTACT END -->
+<!-- get it on PS -->
+
+
+<div class="clearfix " style="width: 100%;background: black;">
+    <div class="container" style=" line-height: 100px;  text-align: center;">
+      <a href="#LINK">
+        <img src="{% static 'img/ps.png' %}" alt="Link" class="float-right" style="width: 250px;height: auto;">
+      </a>
+      <p style="font-family: 'Nunito Sans', sans-serif;font-size: 40px;font-weight: normal;color: #fafafa;
+      margin-bottom: 0px;text-align: left;">
+        Get Hibird internet On Android 
+      </p>
+
+    </div>
+</div>
+  <script id="rendered-js">
+    $('.carousel[data-type="multi"] .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  for (var i=0;i<2;i++) {if (window.CP.shouldStopExecution(0)) break;
+    next=next.next();
+    if (!next.length) {
+      next = $(this).siblings(':first');
+    }
+    
+    next.children(':first-child').clone().appendTo($(this));
+  }window.CP.exitedLoop(0);
+});
+    </script>
+    <script>
+    var Carousel = function (frameSelector, sliderSelector, slidesSelector, btnLeftSelector, btnRightSelector) {
+    //A variable to store the position of the slides
+    var leftPosition = 0;
+    var frame = document.querySelector(frameSelector);
+    var slides = document.querySelectorAll(slidesSelector);
+    //Get the number of slides in the slider
+    var slidesNumber = slides.length;
+    var leftButton = document.querySelector(btnLeftSelector);
+    var rightButton = document.querySelector(btnRightSelector);
+    var slider = document.querySelector(sliderSelector);
+
+    //Add classes to frame and slider divs
+    frame.classList.add('frame');
+    slider.classList.add('slider');
+
+    //Event listeners for when the user clicks on the arrows
+    leftButton.addEventListener("click", function() {
+        carousel.previous();
+    });
+
+    rightButton.addEventListener("click", function() {
+        carousel.next();
+    });
+
+    //Function that moves the slides left or right depending on variable value
+    //Moves to the next slide if value is -1, moves to the previous is value is 1
+    var moveSlide = function (value) {
+        leftPosition += value*350;
+        slider.style.left = leftPosition + 'px';
+    };
+
+    return {
+        //Function to move to next slide
+        next: function() {
+            if(leftPosition > (slidesNumber-1)*-350)
+            {
+                moveSlide(-1);
+            } else {
+                leftPosition = 0;
+                slider.style.left = leftPosition + 'px';
+            }
+        },
+        //Function to go to previous slide
+        previous: function() {
+            if(leftPosition !== 0) {
+                 moveSlide(1);
+            } else {
+                leftPosition = (slidesNumber-1)*-350;
+                slider.style.left = leftPosition + 'px';
+            }
+        }
+    };
+};
+
+//Create new instance of Carousel
+var carousel = new Carousel('#frame', '#slider', '#slider .slide1', '.arrowLeft', '.arrowRight');
+    </script>
+
+
+      <script>
+    const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
+
+    accordionItemHeaders.forEach(accordionItemHeader => {
+      accordionItemHeader.addEventListener("click", event => {
+        accordionItemHeader.classList.toggle("active");
+        const accordionItemBody = accordionItemHeader.nextElementSibling;
+        if (accordionItemHeader.classList.contains("active")) {
+          accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+        }
+        else {
+          accordionItemBody.style.maxHeight = 0;
+        }
+
+      });
+    });
+  </script>
 
 {% endblock content %}

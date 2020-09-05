@@ -3,152 +3,74 @@
 
 
 {% block content %}
-<style type="text/css">
-    body {
-  font-family: 'Montserrat', sans-serif;
-  background-color:#beeafb;
-  color: #fff;
-}
-h5{
-    color:black;
-    font-weight: bold;
-}
-  label {
-    color: black;
-  }
 
-</style>
-<div style="margin-bottom:300px;margin-top:200px">
-<div class="container emp-profile mt-5" style="background-color:white;padding:30px;">
-    <div class="row mt-4">
-    <div class="col-md-4">
-                            <h1 style="color:black;margin-top:100px;">Tranasactions</h1>
-                        <div class="overflow-auto">
-                        <div class="list-group" style="overflow-y:scroll;height:400px;">
-                            {% for tran in transaction %}
-                      <a href="/invoice/{{tran.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1">{{tran.payment_id}}</h5>
-                          <small class="text-muted">{% if tran.success %} Success{% else %} Fail{% endif %}</small>
-                        </div>
-                        <p class="mb-1">{{profile.plan_amount}} ₹</p>
-                        <small class="text-muted">{{tran.date}}</small>
-                      </a>
-                      {% endfor %}
-                    </div>
-                    </div>
-                      
-                </div>
-                    <div class="col-md-8">
-            <form method="get" action="/payment/">
-                <div class="row mt-4">
-                    
-                    <div class="col-md-8" style="margin-top:50px">
-                        <img src="{% static "/img/user.png" %}" height="100px" style="padding:10px">
-                        <div class="profile-head" style="margin-bottom:20px">
-                                    <h5>
-                                        {{user.first_name}} {{user.last_name}}                                    </h5>
-                                    <p class="proile-rating">{{profile.current_plan}}</p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Billdesk</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="opacity:100">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Customer Id</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{user.username}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{user.first_name}} {{user.last_name}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{user.email}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Phone</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.mobile_no}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Join Date</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{user.date_joined}}</p>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Plan</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.current_plan}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Monthly Rate</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.plan_amount}} ₹</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Due Date</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.due_date}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{available}} days</p>
-                                            </div>
-                                        </div>
-                                        {% csrf_token %}
-                                        <a href="/payment/"><button>Pay Now</button></a>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>           
-            </div>
-            </div>
+<div class="container sub-container1" style="margin-top: 50px;">
+  
+    <div class="section-title">
+          <h2 style="font-weight: normal;"> Profile </h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="pf-user">
+          <img src="{% static 'img/user.png' %}" class="rounded mx-auto d-block" width="140" height="140" style="margin-bottom: 10px;">
+          <p class="text-center"><b>{{user.first_name}} {{user.last_name}}</b></p> <br>
+
+<b>Customer Id:</b> {{user.username}}<br><br>
+
+<b>Name:</b> {{user.first_name}} {{user.last_name}}<br><br>
+
+<b>Email:</b> {{user.email}}<br><br>
+
+<b>Phone:</b> {{profile.mobile_no}}<br><br>
+
+<b>Join Date:</b> {{user.date_joined}}<br><br>
+
         </div>
-</div>
+      </div>   
+      <div class="col-md-8">
+        <div class="pf-pay"><h3> Billdesk </h3>
+          
+          <br>
+          <span style="float: right;"> Due Date: {{profile.due_date}} </span>
+          <span style=""> Plan: {{profile.current_plan}}</span>
+          <br>
+          <span style=""> Monthly Rate: {{profile.plan_amount}} ₹ </span>
+          <span style="float: right;"> Availability: {{available}} days </span>
+          
+          <br>
+          <br>
+          <a href="/payment/"><button class="paynow-btn text-left" >PAY NOW</button></a>
+        </div>
+        <div class="pf-trans">
+          <br>
+          <h3> Transactions </h3>
+          <!-- <h3> No Transaction</h3> -->
+
+          <br>
+          <table>
+             
+            <tr>
+              <td><b>ID</b></td>
+              <td><b>Status</b></td>
+              <td><b>Price</b></td>
+              <td><b>Date</b></td>
+              <td><b>Check</b></td>
+            </tr>
+            {% for tran in transaction %}
+            <tr>
+              <td>{{tran.payment_id}}</td>
+              <td>{% if tran.success %} Success{% else %} Fail{% endif %}</td>
+              <td>{{tran.amount}} ₹</td>
+              <td>{{tran.date}}</td>
+              <td><a href="#">View</a></td>
+            </tr>
+            {% endfor %}
+          </table>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock content %}

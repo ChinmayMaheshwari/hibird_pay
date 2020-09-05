@@ -13,6 +13,9 @@ from rest_framework import viewsets
 from .serializers import *
 from .utils import render_to_pdf
 from .forms import ContactForm
+
+# API KEYS Enviroment var
+
 class SliderView(viewsets.ModelViewSet):
 	queryset = Slider.objects.all()
 	serializer_class = SliderSerializer
@@ -53,7 +56,7 @@ class PersonalInfoView(APIView):
     	'current_plan':profile.current_plan,
     	'renew_date':profile.due_date.strftime('%d-%b-%Y'),
     	'available':(profile.due_date-date.today()).days,
-    	'contact_no':9044046862
+    	'contact_no':9044046862#Enviroment Variable
     	}
     	return Response(content)
 
@@ -79,7 +82,7 @@ class PaymentInfoView(APIView):
         'status':'false', 
     	'amount':profile.plan_amount,
     	'transaction':transaction.id,
-    	'key':'rzp_test_gRPiCKGFiZqfz3'
+    	'key':'rzp_test_gRPiCKGFiZqfz3'#os.environ.get('Razorpay_Key')
     	}
 		return Response(content)
 	
@@ -102,13 +105,10 @@ class PaymentInfoView(APIView):
 
 def index(request):
 	dic = {}
-	dic['plan'] = PlanDetail.objects.all()
+	dic['plans'] = PlanDetail.objects.all()
 	try:
-		slider = WebSlider.objects.all().order_by('-id')[:4]
-		dic['slider1']=slider[0]
-		dic['slider2']=slider[1]
-		dic['slider3']=slider[2]
-		dic['slider4']=slider[3]
+		slider = Slider.objects.all().order_by('-id')[:4]
+		dic['sliders'] = slider
 	except:
 		pass
 	return render(request,'index.html',dic)
@@ -161,7 +161,7 @@ def payment(request):
 			profile.due_date = profile.due_date+timedelta(days=30)
 			profile.save()
 			transaction.save()
-			return HttpResponseRedirect('/profile/')
+			return HttpResponseRedirect('/profile/?transaction=success')
 		except:
 			return HttpResponse('Transaction Failed')
 
@@ -173,9 +173,9 @@ def generateInvoice(request,tid=None):
 	token = request.GET.get('token')
 	user = request.user
 	if token:
-		print(token)
+#		print(token)
 		user = Token.objects.get(key=str(token)).user
-	print(user)
+#	print(user)
 	if user:
 		try:
 			transaction = TransactionDetail.objects.get(id=tid,success=True)

@@ -5,125 +5,74 @@
 
 
 
-<!DOCTYPE html>
-<html>
+<div class="container sub-container1" style="margin-top: 50px;">
+  
+      <div class="section-title">
+            <h2 style="font-weight: normal;"> Login </h2>
+      </div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybird --Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+      <div class="row">
+      <div class="col-md-6">
+                <img class="text-center" src="{% static 'img/login.gif' %}" alt="login" style="width: 100%;">
+      </div>
+            
+      <div class="col-md-6">
+
+                
+                <form action="/login/" name="login" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Customer ID</label>
+                      <input type="username" name="username" class="form-control form1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required="">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" name="password" class="form-control form1" id="exampleInputPassword1" placeholder="Password" required="" >
+                    </div>
+
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                         <p onclick="forpass();" style="cursor: pointer; float:right;">Forget Password ??</p>
+                    </div>
+
+                    <button type="submit" class="login-btn" style="">Login</button>
+                    <br>
+                    <br>
+                    <p style="color:green;font-weight:bold;">{{request.GET.success}}</p>
+                  </form>
+
+                <br><br>
+
+                <div id="forget-div" style="display: none;">
+                  <form action="/password_reset/" name="login" method="post">
+                    {% csrf_token %}
+                    <p><b>Forget Password</b></p>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Email</label>
+                      <input type="email" name="email" class="form-control form1" id="exampleInputPassword1" placeholder="Email" required="" >
+                      <br>
+                    <button type="submit" class="login-btn" style="">Submit</button>
+                    <p onclick="forpassHide();" style="cursor: pointer; float:right;">Hide</p>
+                    </div>
+                  </form>
+                </div>
 
 
-    <style type="text/css">
-      
+          </div>
+        </div>
+  </div>
+  <script type="text/javascript">
+  
 
-
-      html,body{
-background-color:#beeafb;
-/*font-family: 'Numans', sans-serif;*/
+function forpass() {
+   document.getElementById("forget-div").style.display = "block";
 }
-      .login-dark {
-      height:1000px;
-      /*background:#2d545e;*/
-      /*background:skyblue;*/
-      background-size:cover;
-      position:relative;
-    }
+function forpassHide() {
+   document.getElementById("forget-div").style.display = "none";
+}
 
-    .login-dark form {
-      max-width:320px;
-      width:90%;
-      background-color:#1e2833;
-      padding:40px;
-      border-radius:4px;
-      transform:translate(-50%, -50%);
-      position:absolute;
-      top:50%;
-      left:50%;
-      color:#fff;
-      box-shadow:3px 3px 4px rgba(0,0,0,0.2);
-    }
-
-    .login-dark .illustration {
-      text-align:center;
-      padding:15px 0 20px;
-      font-size:100px;
-      color:#2980ef;
-    }
-
-    .login-dark form .form-control {
-      background:none;
-      border:none;
-      border-bottom:1px solid #434a52;
-      border-radius:0;
-      box-shadow:none;
-      outline:none;
-      color:inherit;
-    }
-
-    .login-dark form .btn-primary {
-      background:#214a80;
-      border:none;
-      border-radius:4px;
-      padding:11px;
-      box-shadow:none;
-      margin-top:26px;
-      text-shadow:none;
-      outline:none;
-    }
-
-    .login-dark form .btn-primary:hover, .login-dark form .btn-primary:active {
-      background:#214a80;
-      outline:none;
-    }
-
-    .login-dark form .forgot {
-      display:block;
-      text-align:center;
-      font-size:12px;
-      color:#6f7a85;
-      opacity:0.9;
-      text-decoration:none;
-    }
-
-    .login-dark form .forgot:hover, .login-dark form .forgot:active {
-      opacity:1;
-      text-decoration:none;
-    }
-
-    .login-dark form .btn-primary:active {
-      transform:translateY(1px);
-    }
-
-
-
-</style>
-</head>
-
-<body>
-    <div class="login-dark">
-        <form method="post" action="/login/">
-          
-            {% csrf_token %}
-
-            <h2 class="sr-only">Login Form</h2>
-            <div class="illustration"><i class="ion-ios-locked-outline"></i></div>
-            <div class="form-group">
-{% if form.errors %}
-  <p style="color:red">Check username or password</p>
-    {% endif %}
-              <input class="form-control" type="name" name="username" placeholder="Username"></div>
-            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="/password_reset/" class="forgot">Forgot password?</a>
-          
-          </form>
-
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+</script>
 {% endblock %}
