@@ -50,6 +50,7 @@
           border: 1px solid #181111;
           text-align: left;
           padding: 8px;
+          color:white;
           background-color: #181111;
         }
         td {
@@ -64,17 +65,23 @@
 </head>
 <body>
     <div id="main">
-        <h1>TAX INVOICE </h1>
+        <div style="display:flex;width:100%;">
+      <div style="width:50%;float:left;display:inline;">
+          <h1>TAX INVOICE </h1> 
+       </div>
+      <div style="width:50%;float:right;text-align:left;">
+       <img src="https://hybird.herokuapp.com/static/icon.png" width="50px" height="30px" alt="singature">
+      </div>
+    </div>
+        
         <h3>No:- {{id}} | Issue Date {{date}}</h3>
         <hr>
         <h3>Hibird Broadband Services Pvt. Ltd.</h3>
         <br>
     
         <div >
-            <p>Registered Address: <b>Ss1351 sector h lda colony kanpur road lucknow 226012  </b></p>
             <p>Branch Address: <b>Village Bhiti Rawat Post Sahjanwa District Gorakhpur 273209  </b></p>
-            <p>Pan No: <b>AAECA3151B</b></p>
-            <p>GST no: <b>09AAECH6840A1ZT</b></p>
+            <p>GST no: <b>09EDDPS0528H1ZF</b></p>
             <p>Contact: 9044046862, www.hibirdbroadband.co.in</p>
         </div>
         <hr>
@@ -89,9 +96,9 @@
         <!-- table -->
         <table class="center">
             <tr>
-              <th><font color="#fffff">N</font></th>
-              <th><font color="#fffff"> Description of goods or Services</font></th>
-              <th><font color="#fffff"> Amount</font></th>
+              <th><p color="white">N</p></th>
+              <th><p color="white"> Description of goods or Services</p></th>
+              <th><p color="white"> Amount</p></th>
             </tr>
             <tr>
               <td>1</td>
@@ -133,14 +140,12 @@
           <p id="tc">TERMS AND CONDITIONS</p>
           <p id="tc">1) It will be deemed that you have accepted this Invoice in full in the event you have not lodged any written objection with us within 20 days of receipt of this Invoice.</p>
           <p id="tc">2) To avoid disconnection of service you are requested to pay the full amount by the due date mentioned in the invoice. An interest of 18% per annum will be charged on the amountremaining unpaid after the due date.</p>
-          <p id="tc">3) All Cheques/Demand Drafts in payment of Invoice should be drawn in favour of "Alliance Broadband Services Pvt. Ltd.</p>
           <p id="tc">4) Kindly mention invoice number along with your payment to ensure correct and timely processing.</p> 
-          <p id="tc">5) Cheque Return Charges of Rs. 250 would be charged extra</p> 
-          <p id="tc">6) E. & O. E.</p>
     
           <!-- footer -->
           <div id="footer-a">
               <p>Issuer: Hibird Broadband [Uttar Pradesh]</p>
+              <p style="font-size:8px;">Registered Address: Ss1351 sector h lda colony kanpur road lucknow 226012</p>
               <img src="https://hybird.herokuapp.com/static/web_signature.jpg" width="100px" height="30px" alt="singature">
           </div>
           <div id="footer-b">
