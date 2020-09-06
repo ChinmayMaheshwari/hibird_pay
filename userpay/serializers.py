@@ -4,7 +4,7 @@ from .models import *
 class TransactionDetailSerializer(serializers.ModelSerializer):
     invoice = serializers.SerializerMethodField('slug_field')
     def slug_field(self,obj):
-        return 'https://hybird.herokuapp.com/media/invoice/'+str(obj.id)
+        return 'https://hybird.herokuapp.com/media/invoice/'+str(obj.id)+'.pdf'
     class Meta:
         model = TransactionDetail
         fields = ['order_id','payment_id','date','success','amount','invoice',]
