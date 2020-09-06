@@ -106,6 +106,7 @@ class PaymentInfoView(APIView):
 		try:
 			client.utility.verify_payment_signature({'razorpay_order_id':transaction.order_id,'razorpay_payment_id':request.data.get('razorpay_payment_id'),'razorpay_signature':request.data.get('razorpay_signature')})
 			transaction.success	=True
+			transaction.invoice = 'invoice/'+str(transaction.id)
 			profile = Profile.objects.get(user=request.user)
 			profile.due_date = profile.due_date+timedelta(days=30)
 			profile.save()
@@ -167,6 +168,7 @@ def payment(request):
 		try:
 			client.utility.verify_payment_signature({'razorpay_order_id':transaction.order_id,'razorpay_payment_id':data['razorpay_payment_id'],'razorpay_signature':data['razorpay_signature']})
 			transaction.success	= True
+			transaction.invoice = 'invoice/'+str(transaction.id)
 			profile = Profile.objects.get(user=request.user)
 			profile.due_date = profile.due_date+timedelta(days=30)
 			profile.save()
@@ -189,8 +191,9 @@ def generateInvoice(request,tid=None):
 			transaction = TransactionDetail.objects.get(id=tid,success=True)
 		except:
 			return HttpResponse('Invalid Transaction')
-		if transaction.cash_payment:
+		if transaction.cash_payment or (transaction.user!=user and not user.is_superuser):
 			return HttpResponse('Invalid Transaction')
+		user = transaction.user
 		profile = Profile.objects.get(user=user)
 		data = {
 		'id':transaction.id,
@@ -202,7 +205,7 @@ def generateInvoice(request,tid=None):
 		'due_date':profile.due_date,
 		'tran_id':transaction.payment_id,
 		'amount':profile.plan_amount-(profile.plan_amount*18)/100,
-		'month':profile.due_date.strftime('%B'),
+		'month':transaction.date.strftime('%B'),
 		'nine_per':(profile.plan_amount*9)/100,
 		'total':profile.plan_amount,
 		'gst':profile.gst if profile.gst else 'NA',

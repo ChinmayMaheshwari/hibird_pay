@@ -22,7 +22,7 @@
         #footer-b{
             font-size: 12px;
             display: inline-block;
-            text-align: right;
+            /*text-align: right;*/
             width: 40%;
         }
         #main{
@@ -65,15 +65,7 @@
 </head>
 <body>
     <div id="main">
-        <div style="display:flex;width:100%;">
-      <div style="width:50%;float:left;display:inline;">
-          <h1>TAX INVOICE </h1> 
-       </div>
-      <div style="width:50%;float:right;text-align:left;">
-       <img src="https://hybird.herokuapp.com/static/icon.png" width="50px" height="30px" alt="singature">
-      </div>
-    </div>
-        
+          <h1>TAX INVOICE </h1>
         <h3>No:- {{id}} | Issue Date {{date}}</h3>
         <hr>
         <h3>Hibird Broadband Services Pvt. Ltd.</h3>
@@ -89,6 +81,8 @@
     
         <h3><i>TO:</i> <b>{{ name }}</b></h3>
         <div>
+            <p>Email: <b>{{email}}</b></p>
+            <p>GST: <b>{{gst}}</b></p>
             <p>Address: <b>{{address}}, PIN-273209 {{mobile_no}} </b></p>
             <p>State: <b>Uttar Pradesh</b></p>
         </div>
@@ -132,7 +126,7 @@
                 <td colspan="3">Payment method: Razorpay</td>
             </tr>
             <tr>
-                <td colspan="3">Month of occurrence of chargeable event / payment: {{month}}</td>
+                <td colspan="3">Month of occurrence of chargeable payment: {{month}} | Next Due Date: {{due_date}}</td>
             </tr>
           </table>
     
@@ -151,6 +145,7 @@
           <div id="footer-b">
             <p>Receiver:{{name}}</p>  
             <p>Client ID:{{customer_id}}</p> 
+            <p>Transaction ID:{{tran_id}}</p> 
             <p>Mobile NO:{{mobile_no}}</p>
           </div>
     

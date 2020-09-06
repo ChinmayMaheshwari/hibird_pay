@@ -48,7 +48,7 @@ class TransactionDetail(models.Model):
 	success = models.BooleanField(default=False)
 	amount = models.PositiveIntegerField(default=0)
 	cash_payment = models.BooleanField(default=False)
-	
+	invoice = models.URLField(unique=True,blank=True,null=True)
 	def __str__(self):
 		return self.user.username
 @receiver(post_save,sender=TransactionDetail)

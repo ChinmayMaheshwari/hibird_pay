@@ -8,7 +8,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
 from django.contrib.admin import SimpleListFilter
 from datetime import datetime,date,timedelta
-
+from django.utils.html import format_html
 import requests
 
 class PaidFilter(SimpleListFilter):
@@ -26,7 +26,16 @@ class PaidFilter(SimpleListFilter):
 class TransactionAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__first_name','user__email',)
     list_filter = ('success',)
+    exclude = ('invoice',)
+    readonly_fields = ('my_clickable_link',)
+    def my_clickable_link(self, instance):
+        return format_html(
+            '<a href="/{0}">Click Here to Download Invoice</a>',
+            instance.invoice,
+            instance.invoice,
+        )
 
+    my_clickable_link.short_description = "Download Invoice"
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__email','mobile_no',)
     readonly_fields = ('due_date',)
