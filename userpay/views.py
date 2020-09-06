@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from .serializers import *
-from .utils import render_to_pdf
+from .utils import *
 from .forms import ContactForm
 
 # API KEYS Enviroment var
@@ -203,7 +203,9 @@ def generateInvoice(request,tid=None):
 		'month':profile.due_date.strftime('%B'),
 		'nine_per':(profile.plan_amount*9)/100,
 		'total':profile.plan_amount,
-		'gst':profile.gst if profile.gst else 'NA'
+		'gst':profile.gst if profile.gst else 'NA',
+		'address':profile.address,
+		'amount_words':convertToWords(profile.plan_amount)
 		}
 		html_template = get_template('invoice2.html').render(data)
 		pdf_file = HTML(string=html_template).write_pdf()

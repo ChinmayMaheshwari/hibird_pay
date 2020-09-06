@@ -1,287 +1,159 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<HTML>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<TITLE>null</TITLE>
-<META name="generator" content="BCL easyConverter SDK 5.0.210">
-<STYLE type="text/css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice {{id}}</title>
+    <style>
+      body {
+          font-size: 7px;
+        }
+        .bottomright {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+            font-size: 18px;
+        }
+        #footer-a{
+            display: inline-block;
+            width: 40%;
+            font-size: 12px;
+        }
+        #footer-b{
+            font-size: 12px;
+            display: inline-block;
+            text-align: right;
+            width: 40%;
+        }
+        #main{
+            position: relative;
+            margin: auto;
+            width: 80%;
+        }
+        #tc{
+            font-size: 10px;
+        }
 
-body {margin-top: 0px;margin-left: 0px;}
+        td[colspan="2"] {
+            text-align: right;
+        }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        table.center {
+            margin-left:auto; 
+            margin-right:auto;
+        }
+        th {
+          border: 1px solid #181111;
+          text-align: left;
+          padding: 8px;
+          background-color: #181111;
+        }
+        td {
+          border: 1px solid #181111;
+          text-align: left;
+          padding: 8px;
+        }
+        tr{
+          background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1>TAX INVOICE </h1>
+        <h3>No:- {{id}} | Issue Date {{date}}</h3>
+        <hr>
+        <h3>Hibird Broadband Services Pvt. Ltd.</h3>
+        <br>
+    
+        <div >
+            <p>Registered Address: <b>Ss1351 sector h lda colony kanpur road lucknow 226012  </b></p>
+            <p>Branch Address: <b>Village Bhiti Rawat Post Sahjanwa District Gorakhpur 273209  </b></p>
+            <p>Pan No: <b>AAECA3151B</b></p>
+            <p>GST no: <b>09AAECH6840A1ZT</b></p>
+            <p>Contact: 9044046862, www.hibirdbroadband.co.in</p>
+        </div>
+        <hr>
+        <br>
+    
+        <h3><i>TO:</i> <b>{{ name }}</b></h3>
+        <div>
+            <p>Address: <b>{{address}}, PIN-273209 {{mobile_no}} </b></p>
+            <p>State: <b>Uttar Pradesh</b></p>
+        </div>
+    
+        <!-- table -->
+        <table class="center">
+            <tr>
+              <th><font color="#fffff">N</font></th>
+              <th><font color="#fffff"> Description of goods or Services</font></th>
+              <th><font color="#fffff"> Amount</font></th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Wifi Service Payment Bill Payment For {{month}}</td>
+              <td>{{amount}}</td>
+            </tr>
+            <tr>
+              <td colspan="2">Total Amount</td>
+              <td>{{amount}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">GST (9%)</td>
+                <td>{{nine_per}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">SGST (9%)</td>
+                <td>{{nine_per}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>Total</b></td>
+                <td><b>{{total}}</b></td>
+            </tr>
+            <tr>
+                <td colspan="2">Rounded Off</td>
+                <td><b>{{total}}</b></td>
+            </tr>
+            <tr>
+                <td colspan="3">IN WORDS: {{amount_words}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">Payment method: Razorpay</td>
+            </tr>
+            <tr>
+                <td colspan="3">Month of occurrence of chargeable event / payment: {{month}}</td>
+            </tr>
+          </table>
+    
+          <!-- terns abd conditions -->
+          <p id="tc">TERMS AND CONDITIONS</p>
+          <p id="tc">1) It will be deemed that you have accepted this Invoice in full in the event you have not lodged any written objection with us within 20 days of receipt of this Invoice.</p>
+          <p id="tc">2) To avoid disconnection of service you are requested to pay the full amount by the due date mentioned in the invoice. An interest of 18% per annum will be charged on the amountremaining unpaid after the due date.</p>
+          <p id="tc">3) All Cheques/Demand Drafts in payment of Invoice should be drawn in favour of "Alliance Broadband Services Pvt. Ltd.</p>
+          <p id="tc">4) Kindly mention invoice number along with your payment to ensure correct and timely processing.</p> 
+          <p id="tc">5) Cheque Return Charges of Rs. 250 would be charged extra</p> 
+          <p id="tc">6) E. & O. E.</p>
+    
+          <!-- footer -->
+          <div id="footer-a">
+              <p>Issuer: Hibird Broadband [Uttar Pradesh]</p>
+              <img src="https://hybird.herokuapp.com/static/web_signature.jpg" width="100px" height="30px" alt="singature">
+          </div>
+          <div id="footer-b">
+            <p>Receiver:{{name}}</p>  
+            <p>Client ID:{{customer_id}}</p> 
+            <p>Mobile NO:{{mobile_no}}</p>
+          </div>
+    
+          <p>Authorised Signatory</p>
+          <br>
+          <br>
+          <hr>
+    </div>
 
-#page_1 {position:relative; overflow: hidden;margin: 5px 0px 12px 0px;padding: 0px;border: none;width: 747px;}
-#page_1 #id1_1 {border:none;margin: 0px 0px 0px 0px;padding: 0px;border:none;width: 747px;overflow: hidden;}
-#page_1 #id1_2 {border:none;margin: 0px 0px 0px 237px;padding: 0px;border:none;width: 510px;overflow: hidden;}
-
-#page_1 #p1dimg1 {position:absolute;top:82px;left:71px;z-index:-1;width:641px;height:678px;}
-#page_1 #p1dimg1 #p1img1 {width:641px;height:678px;}
-
-
-
-
-.ft0{font: bold 25px 'Arial';line-height: 30px;}
-.ft1{font: bold 15px 'Arial';line-height: 18px;}
-.ft2{font: 18px 'Arial';line-height: 21px;}
-.ft3{font: bold 18px 'Arial';line-height: 21px;}
-.ft4{font: bold 10px 'Arial';line-height: 12px;}
-.ft5{font: italic 10px 'Arial';line-height: 13px;}
-.ft6{font: 10px 'Arial';line-height: 13px;}
-.ft7{font: italic 15px 'Arial';line-height: 17px;}
-.ft8{font: bold 10px 'Arial';color: #ffffff;line-height: 12px;}
-.ft9{font: 9px 'Arial';line-height: 12px;}
-.ft10{font: 1px 'Arial';line-height: 1px;}
-.ft11{font: italic bold 10px 'Arial';line-height: 11px;}
-.ft12{font: bold 8px 'Arial';line-height: 10px;}
-.ft13{font: italic 7px 'Arial';line-height: 7px;}
-.ft14{font: italic 8px 'Arial';margin-left: 3px;line-height: 11px;}
-.ft15{font: italic 8px 'Arial';line-height: 11px;}
-.ft16{font: italic 8px 'Arial';margin-left: 3px;line-height: 9px;}
-.ft17{font: italic 8px 'Arial';line-height: 9px;}
-.ft18{font: italic 8px 'Arial';margin-left: 3px;line-height: 10px;}
-.ft19{font: italic 8px 'Arial';line-height: 10px;}
-.ft20{font: bold 9px 'Arial';line-height: 11px;}
-.ft21{font: italic 9px 'Arial';line-height: 12px;}
-.ft22{font: 8px 'Arial';line-height: 10px;}
-.ft23{font: 11px 'Courier New';line-height: 10px;}
-.ft24{font: 1px 'Arial';line-height: 10px;}
-.ft25{font: 1px 'Arial';line-height: 3px;}
-.ft26{font: bold 13px 'Arial';line-height: 15px;}
-.ft27{font: 1px 'Arial';line-height: 12px;}
-.ft28{font: 1px 'Arial';line-height: 2px;}
-.ft29{font: 1px 'Arial';line-height: 4px;}
-.ft30{font: 10px 'Arial';line-height: 12px;}
-.ft31{font: 8px 'Calibri';line-height: 10px;}
-
-.p0{text-align: left;padding-left: 75px;margin-top: 0px;margin-bottom: 0px;}
-.p1{text-align: right;padding-right: 35px;margin-top: 4px;margin-bottom: 0px;}
-.p2{text-align: left;padding-left: 75px;margin-top: 2px;margin-bottom: 0px;}
-.p3{text-align: left;padding-left: 75px;margin-top: 12px;margin-bottom: 0px;}
-.p4{text-align: left;padding-left: 75px;margin-top: 9px;margin-bottom: 0px;}
-.p5{text-align: left;padding-left: 75px;margin-top: 8px;margin-bottom: 0px;}
-.p6{text-align: left;padding-left: 14px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p7{text-align: right;padding-right: 7px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p8{text-align: left;padding-left: 16px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p9{text-align: right;padding-right: 324px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p10{text-align: left;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p11{text-align: left;padding-left: 75px;margin-top: 10px;margin-bottom: 0px;}
-.p12{text-align: left;padding-left: 75px;margin-top: 7px;margin-bottom: 0px;}
-.p13{text-align: left;padding-left: 75px;margin-top: 6px;margin-bottom: 0px;}
-.p14{text-align: left;padding-left: 75px;padding-right: 71px;margin-top: 0px;margin-bottom: 0px;}
-.p15{text-align: left;padding-left: 75px;margin-top: 50px;margin-bottom: 0px;}
-.p16{text-align: left;padding-left: 44px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p17{text-align: left;padding-left: 49px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p18{text-align: left;padding-left: 2px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p19{text-align: right;padding-right: 4px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p20{text-align: left;padding-left: 9px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p21{text-align: right;padding-right: 2px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p22{text-align: right;padding-right: 3px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p23{text-align: right;padding-right: 1px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p24{text-align: left;padding-left: 1px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-.p25{text-align: left;margin-top: 0px;margin-bottom: 0px;}
-
-.td0{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 556px;vertical-align: bottom;}
-.td1{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 85px;vertical-align: bottom;}
-.td2{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 29px;vertical-align: bottom;background: #e0e0e0;}
-.td3{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 525px;vertical-align: bottom;background: #e0e0e0;}
-.td4{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 85px;vertical-align: bottom;background: #e0e0e0;}
-.td5{border-right: #e0e0e0 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 29px;vertical-align: bottom;background: #e0e0e0;}
-.td6{border-right: #e0e0e0 1px solid;border-bottom: #e0e0e0 1px solid;padding: 0px;margin: 0px;width: 29px;vertical-align: bottom;background: #e0e0e0;}
-.td7{border-right: #000000 1px solid;border-bottom: #e0e0e0 1px solid;padding: 0px;margin: 0px;width: 525px;vertical-align: bottom;background: #e0e0e0;}
-.td8{border-bottom: #e0e0e0 1px solid;padding: 0px;margin: 0px;width: 85px;vertical-align: bottom;background: #e0e0e0;}
-.td9{border-right: #e0e0e0 1px solid;border-top: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 29px;vertical-align: bottom;background: #e0e0e0;}
-.td10{border-right: #000000 1px solid;border-top: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 525px;vertical-align: bottom;background: #e0e0e0;}
-.td11{border-top: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 85px;vertical-align: bottom;background: #e0e0e0;}
-.td12{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 29px;vertical-align: bottom;background: #000000;}
-.td13{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 525px;vertical-align: bottom;background: #000000;}
-.td14{padding: 0px;margin: 0px;width: 85px;vertical-align: bottom;background: #000000;}
-.td15{padding: 0px;margin: 0px;width: 320px;vertical-align: bottom;}
-.td16{padding: 0px;margin: 0px;width: 100px;vertical-align: bottom;}
-.td17{border-right: #000000 1px solid;border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 362px;vertical-align: bottom;}
-.td18{border-right: #000000 1px solid;border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 2px;vertical-align: bottom;}
-.td19{border-right: #000000 1px solid;border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 3px;vertical-align: bottom;}
-.td20{border-right: #000000 1px solid;border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 5px;vertical-align: bottom;}
-.td21{border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 2px;vertical-align: bottom;}
-.td22{border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 7px;vertical-align: bottom;background: #000000;}
-.td23{border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 8px;vertical-align: bottom;background: #000000;}
-.td24{border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 5px;vertical-align: bottom;background: #000000;}
-.td25{border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 6px;vertical-align: bottom;background: #000000;}
-.td26{border-top: #000000 1px solid;padding: 0px;margin: 0px;width: 217px;vertical-align: bottom;}
-.td27{padding: 0px;margin: 0px;width: 57px;vertical-align: bottom;}
-.td28{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 47px;vertical-align: bottom;}
-.td29{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 4px;vertical-align: bottom;}
-.td30{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 75px;vertical-align: bottom;}
-.td31{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 28px;vertical-align: bottom;}
-.td32{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 58px;vertical-align: bottom;}
-.td33{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 13px;vertical-align: bottom;}
-.td34{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 32px;vertical-align: bottom;}
-.td35{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 3px;vertical-align: bottom;}
-.td36{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 100px;vertical-align: bottom;}
-.td37{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 68px;vertical-align: bottom;}
-.td38{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 143px;vertical-align: bottom;}
-.td39{padding: 0px;margin: 0px;width: 47px;vertical-align: bottom;}
-.td40{padding: 0px;margin: 0px;width: 4px;vertical-align: bottom;}
-.td41{padding: 0px;margin: 0px;width: 75px;vertical-align: bottom;}
-.td42{padding: 0px;margin: 0px;width: 28px;vertical-align: bottom;}
-.td43{padding: 0px;margin: 0px;width: 210px;vertical-align: bottom;}
-.td44{padding: 0px;margin: 0px;width: 3px;vertical-align: bottom;}
-.td45{padding: 0px;margin: 0px;width: 68px;vertical-align: bottom;}
-.td46{padding: 0px;margin: 0px;width: 143px;vertical-align: bottom;}
-.td47{padding: 0px;margin: 0px;width: 39px;vertical-align: bottom;}
-.td48{padding: 0px;margin: 0px;width: 18px;vertical-align: bottom;}
-.td49{padding: 0px;margin: 0px;width: 273px;vertical-align: bottom;}
-.td50{padding: 0px;margin: 0px;width: 152px;vertical-align: bottom;}
-.td51{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 104px;vertical-align: bottom;}
-.td52{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 103px;vertical-align: bottom;}
-.td53{border-left: #000000 1px solid;padding: 0px;margin: 0px;width: 38px;vertical-align: bottom;}
-.td54{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 46px;vertical-align: bottom;}
-.td55{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 3px;vertical-align: bottom;}
-.td56{padding: 0px;margin: 0px;width: 58px;vertical-align: bottom;}
-.td57{padding: 0px;margin: 0px;width: 13px;vertical-align: bottom;}
-.td58{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 31px;vertical-align: bottom;}
-.td59{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 99px;vertical-align: bottom;}
-.td60{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 2px;vertical-align: bottom;}
-.td61{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 67px;vertical-align: bottom;}
-.td62{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 142px;vertical-align: bottom;}
-.td63{border-left: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 38px;vertical-align: bottom;}
-.td64{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 18px;vertical-align: bottom;}
-.td65{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 46px;vertical-align: bottom;}
-.td66{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 31px;vertical-align: bottom;}
-.td67{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 99px;vertical-align: bottom;}
-.td68{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 67px;vertical-align: bottom;}
-.td69{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 142px;vertical-align: bottom;}
-.td70{padding: 0px;margin: 0px;width: 90px;vertical-align: bottom;}
-.td71{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 39px;vertical-align: bottom;}
-.td72{border-left: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 64px;vertical-align: bottom;}
-.td73{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 74px;vertical-align: bottom;}
-.td74{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 12px;vertical-align: bottom;}
-.td75{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 139px;vertical-align: bottom;}
-.td76{border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 65px;vertical-align: bottom;}
-.td77{border-left: #000000 1px solid;border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 102px;vertical-align: bottom;}
-.td78{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 102px;vertical-align: bottom;}
-.td79{border-right: #000000 1px solid;border-bottom: #000000 1px solid;padding: 0px;margin: 0px;width: 3px;vertical-align: bottom;}
-.td80{border-right: #000000 1px solid;padding: 0px;margin: 0px;width: 324px;vertical-align: bottom;}
-.td81{padding: 0px;margin: 0px;width: 32px;vertical-align: bottom;}
-.td82{padding: 0px;margin: 0px;width: 214px;vertical-align: bottom;}
-
-.tr0{height: 22px;}
-.tr1{height: 19px;}
-.tr2{height: 18px;}
-.tr3{height: 1px;}
-.tr4{height: 13px;}
-.tr5{height: 15px;}
-.tr6{height: 36px;}
-.tr7{height: 10px;}
-.tr8{height: 14px;}
-.tr9{height: 3px;}
-.tr10{height: 12px;}
-.tr11{height: 16px;}
-.tr12{height: 17px;}
-.tr13{height: 2px;}
-.tr14{height: 4px;}
-.tr15{height: 60px;}
-.tr16{height: 59px;}
-
-.t0{width: 641px;margin-left: 71px;margin-top: 4px;font: 10px 'Arial';}
-.t1{width: 420px;margin-left: 75px;margin-top: 2px;font: italic 10px 'Arial';}
-.t2{width: 641px;margin-left: 71px;margin-top: 83px;font: 8px 'Arial';}
-.t3{width: 642px;margin-left: 71px;font: 10px 'Arial';}
-
-</STYLE>
-</HEAD>
-
-<BODY>
-<DIV id="page_1" style='margin-right:100px;'>
-
-
-<DIV id="id1_1" style='margin-right:20px;padding-right:100px;'>
-<P class="p0 ft0">TAX INVOICE</P>
-<P class="p1 ft1">ORIGINAL for RECIPIENT</P>
-<P class="p2 ft3">No:- 0230079963 | <SPAN class="ft2">Issue Date </SPAN>23.07.2020</P>
-<P class="p3 ft1">Alliance Broadband Services Pvt. Ltd.</P>
-<P class="p4 ft5">City: <SPAN class="ft4">Noida</SPAN></P>
-<P class="p0 ft4"><SPAN class="ft5">Address: </SPAN>UNIT <NOBR>NO-11</NOBR> <NOBR>G-14,</NOBR> 1ST FLOOR <NOBR>SECTOR-3,</NOBR> GAUTAM BUDDHA NAGAR, UTTAR PRADESH, NOIDA,201301</P>
-<P class="p0 ft4"><SPAN class="ft5">PAN No: </SPAN>AAECA3151B</P>
-<P class="p0 ft4"><SPAN class="ft5">GST No: </SPAN>09AAECA3151B1Z8</P>
-<P class="p0 ft4"><SPAN class="ft5">State: </SPAN>Uttar Pradesh <SPAN class="ft5">code: </SPAN>09</P>
-<P class="p0 ft5">SAC No: <SPAN class="ft4">998422</SPAN></P>
-<P class="p0 ft6">Phone: <NOBR>033-71002000,</NOBR> Toll Free No: 1800 1200 300 www.alliancebroadband.co.in</P>
-<P class="p5 ft1"><SPAN class="ft7">TO: </SPAN>HARISH CHANDRA GUPT</P>
-<P class="p5 ft4"><SPAN class="ft5">Address: </SPAN>JHANGA HATA KUSHINAGAR UTTAR PRADESH, <NOBR>PIN-274203</NOBR> 9779889523</P>
-<P class="p2 ft4"><SPAN class="ft5">State: </SPAN>Uttar Pradesh <SPAN class="ft5">code: </SPAN>09</P>
-<TABLE cellpadding=0 cellspacing=0 class="t0">
-<TR>
-  <TD colspan=2 class="tr0 td0"><P class="p6 ft8">N Description of goods or services</P></TD>
-  <TD class="tr0 td1"><P class="p7 ft8">amount</P></TD>
-</TR>
-<TR>
-  <TD class="tr1 td2"><P class="p8 ft4">1</P></TD>
-  <TD class="tr1 td3"><P class="p9 ft9">fee "BROWSE+" (23.07.2020 to 21.08.2020)</P></TD>
-  <TD class="tr1 td4"><P class="p7 ft6">400.000</P></TD>
-</TR>
-<TR>
-  <TD class="tr2 td5"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr2 td3"><P class="p7 ft5">TOTAL AMOUNT</P></TD>
-  <TD class="tr2 td4"><P class="p7 ft6">400.00</P></TD>
-</TR>
-<TR>
-  <TD class="tr2 td6"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr2 td7"><P class="p7 ft5">CGST (9%)</P></TD>
-  <TD class="tr2 td8"><P class="p7 ft6">36.00</P></TD>
-</TR>
-<TR>
-  <TD class="tr1 td9"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr1 td10"><P class="p7 ft5">SGST (9%)</P></TD>
-  <TD class="tr1 td11"><P class="p7 ft6">36.00</P></TD>
-</TR>
-<TR>
-  <TD class="tr2 td5"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr2 td3"><P class="p7 ft11">TOTAL</P></TD>
-  <TD class="tr2 td4"><P class="p7 ft4">472.00</P></TD>
-</TR>
-<TR>
-  <TD class="tr2 td6"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr2 td7"><P class="p7 ft11">Rounded off</P></TD>
-  <TD class="tr2 td8"><P class="p7 ft4">472.00</P></TD>
-</TR>
-<TR>
-  <TD class="tr3 td12"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr3 td13"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr3 td14"><P class="p10 ft10">&nbsp;</P></TD>
-</TR>
-</TABLE>
-<P class="p2 ft4"><SPAN class="ft5">IN WORDS: </SPAN><SPAN class="ft6">INR </SPAN>Four hundred and seventy two rupee</P>
-<P class="p11 ft6"><SPAN class="ft5">Payment method: </SPAN>[_] Cheque [_] D.D/P.O. [_] Cash</P>
-<P class="p12 ft5">Date of occurrence of chargeable event / payment: <SPAN class="ft11">23.07.2020 / 23.07.2020</SPAN></P>
-<P class="p13 ft12">TERMS AND CONDITIONS</P>
-<P class="p0 ft15"><SPAN class="ft13">1)</SPAN><SPAN class="ft14">It will be deemed that you have accepted this Invoice in full in the event you have not lodged any written objection with us within 20 days of receipt of this Invoice.</SPAN></P>
-<P class="p14 ft17"><SPAN class="ft13">2)</SPAN><SPAN class="ft16">To avoid disconnection of service you are requested to pay the full amount by the due date mentioned in the invoice. An interest of 18% per annum will be charged on the amount remaining unpaid after the due date.</SPAN></P>
-<P class="p0 ft19"><SPAN class="ft13">3)</SPAN><SPAN class="ft18">All Cheques/Demand Drafts in payment of Invoice should be drawn in favour of "Alliance Broadband Services Pvt. Ltd.".</SPAN></P>
-<P class="p0 ft17"><SPAN class="ft13">4)</SPAN><SPAN class="ft16">Kindly mention invoice number along with your payment to ensure correct and timely processing.</SPAN></P>
-<P class="p0 ft19"><SPAN class="ft13">5)</SPAN><SPAN class="ft18">Cheque Return Charges of Rs. 250 would be charged extra</SPAN></P>
-<P class="p0 ft15"><SPAN class="ft13">6)</SPAN><SPAN class="ft14">E. & O. E.</SPAN></P>
-<TABLE cellpadding=0 cellspacing=0 class="t1">
-<TR>
-  <TD class="tr1 td15"><P class="p10 ft4"><SPAN class="ft5">Issuer: </SPAN>ABSPL_Hyper Computer[Uttar <NOBR>Pradesh]-07</NOBR></P></TD>
-  <TD class="tr1 td16"><P class="p10 ft5">Receiver:</P></TD>
-</TR>
-<TR>
-  <TD class="tr4 td15"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr4 td16"><P class="p10 ft21">Client ID: <SPAN class="ft20">7079183597</SPAN></P></TD>
-</TR>
-<TR>
-  <TD class="tr5 td15"><P class="p10 ft10">&nbsp;</P></TD>
-  <TD class="tr5 td16"><P class="p10 ft21">Authorised Signatory:</P></TD>
-</TR>
-<TR>
-  <TD class="tr6 td15"><P class="p10 ft5">Authorised Signatory</P></TD>
-  <TD class="tr6 td16"><P class="p10 ft10">&nbsp;</P></TD>
-</TR>
-</TABLE>
-<P class="p15 ft4">Additional user details:</P>
-<P class="p0 ft4"><SPAN class="ft6">Username: </SPAN>hcg106_aifc</P>
-<P class="p0 ft4"><SPAN class="ft6">IP Address: </SPAN>172.21.178.106</P>
-<P class="p0 ft4"><SPAN class="ft6">Zone: </SPAN>ABSPL_Hyper Computer[Uttar <NOBR>Pradesh]-07</NOBR></P>
-
-</DIV>
-</DIV>
-</BODY>
-</HTML>
+</body>
+</html>
