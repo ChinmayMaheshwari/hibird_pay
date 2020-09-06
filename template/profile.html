@@ -67,7 +67,7 @@
       <td><div class="threedots">{% if tran.success %} Success{% else %} Fail{% endif %}</div></td>
       <td><div class="threedots">{{tran.amount}} ₹</div></</td>
       <td><div class="threedots">{{tran.date}}</div></td>
-      <td><div class="threedots"><a href="/invoice/{{tran.id}}">View</a></div></</td>
+      <td><div class="threedots"><a href="/media/{{tran.invoice_file}}">View</a></div></</td>
     </tr>
     {% endfor %}
 
@@ -81,5 +81,4 @@
 
          </div>
         
-
 {% endblock content %}

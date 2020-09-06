@@ -111,6 +111,7 @@ class PaymentInfoView(APIView):
 			profile.due_date = profile.due_date+timedelta(days=30)
 			profile.save()
 			transaction.save()
+			generateInvoice(request,transaction.id)
 			return Response({'transaction':True})
 		except:
 			return Response({'transaction':False})
@@ -173,6 +174,7 @@ def payment(request):
 			profile.due_date = profile.due_date+timedelta(days=30)
 			profile.save()
 			transaction.save()
+			generateInvoice(request,transaction.id)
 			return HttpResponseRedirect('/profile/?transaction=success')
 		except:
 			return HttpResponse('Transaction Failed')
@@ -213,10 +215,12 @@ def generateInvoice(request,tid=None):
 		'amount_words':convertToWords(profile.plan_amount)
 		}
 		html_template = get_template('invoice2.html').render(data)
-		pdf_file = HTML(string=html_template).write_pdf()
-		response = HttpResponse(pdf_file, content_type='application/pdf')
-		response['Content-Disposition'] = 'attachment;filename='+str(transaction.id)+'".pdf"'
-		return response
+		pdf_file = HTML(string=html_template).write_pdf('media/invoice/'+str(transaction.id)+'.pdf')
+		transaction.invoice_file = 'invoice/'+str(transaction.id)+'.pdf'
+		transaction.save()
+		# response = HttpResponse(transaction.invoice_file, content_type='application/pdf')
+		# response['Content-Disposition'] = 'attachment;filename='+str(transaction.id)+'".pdf"'
+		# return response
 		# pdf = render_to_pdf('invoice.html',data)
 		# if pdf:
 		# 	response = HttpResponse(pdf, content_type='application/pdf')
