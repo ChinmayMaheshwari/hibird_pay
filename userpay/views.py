@@ -189,6 +189,8 @@ def generateInvoice(request,tid=None):
 			transaction = TransactionDetail.objects.get(id=tid,success=True)
 		except:
 			return HttpResponse('Invalid Transaction')
+		if transaction.cash_payment:
+			return HttpResponse('Invalid Transaction')
 		profile = Profile.objects.get(user=user)
 		data = {
 		'id':transaction.id,
