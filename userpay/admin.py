@@ -47,10 +47,10 @@ class ProfileAdmin(admin.ModelAdmin):
         users = Profile.objects.filter(due_date__lte=date.today()+timedelta(days=3))
         mobile = []
         for i in users:
-            message = 'Hello '+i.user.first_name+',This is to remind you your wifi services are going to expire on '+str(i.due_date)+' please pay your due to continue our services. use https://hybird.herokuapp.com for paying your dues'
+            message = 'Hello '+i.user.first_name+',This is to remind you your wifi services are going to expire on '+str(i.due_date)+' please pay your due to enjoy our services. use https://hybird.herokuapp.com for paying your dues'
             if i.user.email:
                 try:
-                    send_mail('Hibird Payment Remider',message,'chinmay1305@gmail.com',[i.user.email,])
+                    send_mail('Hibird Payment Reminder',message,'chinmay1305@gmail.com',[i.user.email,])
                 except:
                     pass 
             if i.mobile_no:

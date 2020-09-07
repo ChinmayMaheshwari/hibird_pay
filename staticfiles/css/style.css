@@ -332,11 +332,6 @@ font-family: 'Nunito Sans', sans-serif;
   transition: 0.3s;
 }
 
-#contact .social-links a:hover {
-  background: #55b03f;
-  color: #fff;
-}
-
 #contact .form #sendmessage {
   color: #71c55d;
   border: 1px solid #71c55d;

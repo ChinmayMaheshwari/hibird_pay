@@ -222,9 +222,13 @@ def generateInvoice(request,tid=None):
 		pdf_file = HTML(string=html_template).write_pdf('media/invoice/'+str(file_name)+'.pdf')
 		transaction.invoice_file = 'invoice/'+str(file_name)+'.pdf'
 		transaction.save()
-		message = 'There is a Transaction of '+str(profile.plan_amount)+' RS by '+user.first_name+'. customer id:'+user.username
+		message = 'This is a Transaction of '+str(profile.plan_amount)+' RS by '+user.first_name+'. customer id:'+user.username
 		r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=HIBIRD&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+'7905999153'+'&text='+message+'&route=02')
 		print(r.status_code)
+		if profile.mobile_no:
+			message = 'Your Recharge of '+str(profile.plan_amount)+' RS is Successful Thank You For Being Part of Hibird Broadband'
+			r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=HIBIRD&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+profile.mobile_no+'&text='+message+'&route=02')
+			print(r.status_code)
 		# response = HttpResponse(transaction.invoice_file, content_type='application/pdf')
 		# response['Content-Disposition'] = 'attachment;filename='+str(transaction.id)+'".pdf"'
 		# return response
@@ -266,4 +270,4 @@ class ForgotPasswordView(APIView):
 				PasswordResetView.as_view()(request,from_email=email)
 				return Response({'status':'send'})
 		except:
-			return Response({'status':'User Not Found'})
+			return Response({'status':'User Not Found'},status=400)

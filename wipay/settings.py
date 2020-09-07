@@ -159,8 +159,8 @@ MEDIA_ROOT = MEDIA_DIR
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'chinmay1305@gmail.com'
-EMAIL_HOST_PASSWORD = 'jifhmozbdndedxal'
+EMAIL_HOST_USER = 'hibirdassociate@gmail.com'
+EMAIL_HOST_PASSWORD = 'pjmfngmmyldxocmj'
 EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = "profile"
@@ -172,3 +172,7 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
+
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
