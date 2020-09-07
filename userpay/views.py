@@ -23,11 +23,13 @@ class SliderView(viewsets.ModelViewSet):
 	queryset = Slider.objects.all()
 	serializer_class = SliderSerializer
 	http_method_names = ['get']	
+	permission_classes = [IsAuthenticated]
 
 class PlanView(viewsets.ModelViewSet):
 	queryset = PlanDetail.objects.all()
 	serializer_class = PlanSerializer
 	http_method_names = ['get']	
+	permission_classes = [IsAuthenticated]
 
 class TransactionView(viewsets.ModelViewSet):
 	queryset = TransactionDetail.objects.all()
@@ -181,7 +183,7 @@ def payment(request):
 
 
 import requests
-		
+import uuid	
 def generateInvoice(request,tid=None):
 	from weasyprint import HTML, CSS
 	from django.template.loader import get_template
@@ -216,8 +218,9 @@ def generateInvoice(request,tid=None):
 		'amount_words':convertToWords(profile.plan_amount)
 		}
 		html_template = get_template('invoice2.html').render(data)
-		pdf_file = HTML(string=html_template).write_pdf('media/invoice/'+str(transaction.id)+'.pdf')
-		transaction.invoice_file = 'invoice/'+str(transaction.id)+'.pdf'
+		file_name = uuid.uuid1()
+		pdf_file = HTML(string=html_template).write_pdf('media/invoice/'+str(file_name)+'.pdf')
+		transaction.invoice_file = 'invoice/'+str(file_name)+'.pdf'
 		transaction.save()
 		message = 'There is a Transaction of '+str(profile.plan_amount)+' RS by '+user.first_name+'. customer id:'+user.username
 		r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=HIBIRD&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+'7905999153'+'&text='+message+'&route=02')
@@ -254,11 +257,13 @@ from django.middleware.csrf import get_token
 class ForgotPasswordView(APIView):
 	def post(self,request):
 		email = request.data.get('email')
-		user = User.objects.get(email=email)
-		if user:
-			request.data._mutable = True
-			request.data['csrfmiddlewaretoken'] = get_token(request)
-			request.data._mutable = False
-			PasswordResetView.as_view()(request,from_email=email)
-			return Response({'status':'send'})
-		return Response({'status':'User Not Found'})
+		try:
+			user = User.objects.get(email=email)
+			if user:
+				request.data._mutable = True
+				request.data['csrfmiddlewaretoken'] = get_token(request)
+				request.data._mutable = False
+				PasswordResetView.as_view()(request,from_email=email)
+				return Response({'status':'send'})
+		except:
+			return Response({'status':'User Not Found'})

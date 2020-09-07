@@ -41,6 +41,5 @@ urlpatterns = [
     path('api/transaction/',views.TransactionView.as_view({'get': 'list'}),name='transaction'),
     path('api/slider/',views.SliderView.as_view({'get': 'list'}),name='slider'),
     path('api/plandetail/',views.PlanView.as_view({'get': 'list'}),name='plandetail'),
-    path('invoice/<int:tid>/',views.generateInvoice,name='invoice'),
     path('api/forgot/',views.ForgotPasswordView.as_view(),name='forgot_api'),   
 ] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
