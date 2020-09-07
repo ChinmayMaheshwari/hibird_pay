@@ -26,16 +26,16 @@ class PaidFilter(SimpleListFilter):
 class TransactionAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__first_name','user__email',)
     list_filter = ('success',)
-    exclude = ('invoice',)
-    readonly_fields = ('my_clickable_link',)
-    def my_clickable_link(self, instance):
-        return format_html(
-            '<a href="/{0}">Click Here to Download Invoice</a>',
-            instance.invoice,
-            instance.invoice,
-        )
+    # exclude = ('invoice',)
+    # readonly_fields = ('my_clickable_link',)
+    # def my_clickable_link(self, instance):
+    #     return format_html(
+    #         '<a href="/{0}">Click Here to Download Invoice</a>',
+    #         instance.invoice,
+    #         instance.invoice,
+    #     )
 
-    my_clickable_link.short_description = "Download Invoice"
+    # my_clickable_link.short_description = "Download Invoice"
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__email','mobile_no',)
     readonly_fields = ('due_date',)
@@ -56,9 +56,10 @@ class ProfileAdmin(admin.ModelAdmin):
             if i.mobile_no:
                 r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=HIBIRD&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+i.mobile_no+'&text='+message+'&route=02')
                 print(r.status_code)
-admin.site.register(Profile,ProfileAdmin)
 
+admin.site.register(Profile,ProfileAdmin)
 admin.site.register(TransactionDetail,TransactionAdmin)
+
 class UserAdmin(UserAdmin):
     add_form = UserCreateForm
     list_filter = ('is_staff',)

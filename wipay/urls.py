@@ -22,27 +22,12 @@ from .import settings
 from rest_framework.authtoken.views import obtain_auth_token 
 from django.contrib.auth import views as auth_views
 
-
 urlpatterns = [
-    path('admin/password_reset/',
-    auth_views.PasswordResetView.as_view(),
-    name='admin_password_reset'),
-    path(
-    'admin/password_reset/done/',
-    auth_views.PasswordResetDoneView.as_view(),
-    name='password_reset_done'),
-    path(
-    'reset/<uidb64>/<token>/',
-    auth_views.PasswordResetConfirmView.as_view(success_url='/login/'),
-    name='password_reset_confirm'),
-    path(
-    'reset/done/',
-    auth_views.PasswordResetCompleteView.as_view(),
-    name='password_reset_complete'),
-    path('password_reset/',auth_views.PasswordResetView.as_view(
-            template_name='login.html',
-            success_url = '/login/?success=Password reset link sent to your given email id'),
-    name='change_password'),
+    path('admin/password_reset/',auth_views.PasswordResetView.as_view(),name='admin_password_reset'),
+    path('admin/password_reset/done/',auth_views.PasswordResetDoneView.as_view(),name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(success_url='/login/'),name='password_reset_confirm'),
+    path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
+    path('password_reset/',auth_views.PasswordResetView.as_view(template_name='login.html',success_url = '/login/?success=Password reset link sent to your given email id'),name='change_password'),
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
     path('about/',views.about,name='about'),
@@ -56,5 +41,6 @@ urlpatterns = [
     path('api/transaction/',views.TransactionView.as_view({'get': 'list'}),name='transaction'),
     path('api/slider/',views.SliderView.as_view({'get': 'list'}),name='slider'),
     path('api/plandetail/',views.PlanView.as_view({'get': 'list'}),name='plandetail'),
-    path('invoice/<int:tid>/',views.generateInvoice,name='invoice'),             
+    path('invoice/<int:tid>/',views.generateInvoice,name='invoice'),
+    path('api/forgot/',views.ForgotPasswordView.as_view(),name='forgot_api'),   
 ] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

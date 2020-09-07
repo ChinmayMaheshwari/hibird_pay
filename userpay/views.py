@@ -180,7 +180,8 @@ def payment(request):
 			return HttpResponse('Transaction Failed')
 
 
-
+import requests
+		
 def generateInvoice(request,tid=None):
 	from weasyprint import HTML, CSS
 	from django.template.loader import get_template
@@ -218,6 +219,9 @@ def generateInvoice(request,tid=None):
 		pdf_file = HTML(string=html_template).write_pdf('media/invoice/'+str(transaction.id)+'.pdf')
 		transaction.invoice_file = 'invoice/'+str(transaction.id)+'.pdf'
 		transaction.save()
+		message = 'There is a Transaction of '+str(profile.plan_amount)+' RS by '+user.first_name+'. customer id:'+user.username
+		r = requests.get('http://smslogin.pcexpert.in/api/mt/SendSMS?user=HIBIRD&password=123456&senderid=INFOSM&channel=Trans&DCS=0&flashsms=0&number='+'7905999153'+'&text='+message+'&route=02')
+		print(r.status_code)
 		# response = HttpResponse(transaction.invoice_file, content_type='application/pdf')
 		# response['Content-Disposition'] = 'attachment;filename='+str(transaction.id)+'".pdf"'
 		# return response
@@ -245,3 +249,16 @@ def contactForm(request):
 			pass
 	return HttpResponseRedirect('/?fail=True')
 
+from django.contrib.auth.views import PasswordResetView
+from django.middleware.csrf import get_token
+class ForgotPasswordView(APIView):
+	def post(self,request):
+		email = request.data.get('email')
+		user = User.objects.get(email=email)
+		if user:
+			request.data._mutable = True
+			request.data['csrfmiddlewaretoken'] = get_token(request)
+			request.data._mutable = False
+			PasswordResetView.as_view()(request,from_email=email)
+			return Response({'status':'send'})
+		return Response({'status':'User Not Found'})
