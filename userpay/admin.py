@@ -70,6 +70,13 @@ class UserAdmin(UserAdmin):
             'fields': ('first_name', 'last_name', 'username','email', 'password1', 'password2', ),
         }),
     )
+    list_display = ('customer_id',)
+    def customer_id(self,obj):
+        return obj.username
+    customer_id.short_description = 'Customer Id'
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        kwargs['labels'] = {'username': 'Customer Id'}
+        return super().get_form(request, obj=obj, change=change, **kwargs)
     def change_view(self, request, object_id):
 
         # we want to limit the ability of the normal user to edit permissions.

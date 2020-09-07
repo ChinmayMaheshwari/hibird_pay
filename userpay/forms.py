@@ -1,12 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django import forms
 from .models import ContactFormData
 class UserCreateForm(UserCreationForm):
     """
     A UserCreationForm with optional password inputs.
     """
-
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['password1'].required = False
