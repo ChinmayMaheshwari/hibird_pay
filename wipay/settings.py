@@ -25,7 +25,7 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 SECRET_KEY = '4t4=fkcm3!+62k1b!h@#rza+_cj^77&6-ib3^re5sqghr0x33@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1','hybird.herokuapp.com']
 
 # Application definition
