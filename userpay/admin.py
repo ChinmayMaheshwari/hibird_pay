@@ -10,6 +10,10 @@ from django.contrib.admin import SimpleListFilter
 from datetime import datetime,date,timedelta
 from django.utils.html import format_html
 import requests
+from zipfile import ZipFile
+from io import BytesIO
+from django.http import HttpResponse
+#from wsgiref.util import FileWrapper
 
 class PaidFilter(SimpleListFilter):
     title = 'Bill Paid'
@@ -25,7 +29,20 @@ class PaidFilter(SimpleListFilter):
 
 class TransactionAdmin(admin.ModelAdmin):
     search_fields = ('user__username','user__first_name','user__email',)
-    list_filter = ('success',)
+    list_filter = ('success','cash_payment',)
+    actions = ['download_all_invoice',]
+    def download_all_invoice(self,request,queryset):
+        buffer= BytesIO()
+        zipObj= ZipFile( buffer, "w" )
+        for i in queryset:
+            try:
+                zipObj.write('media/'+str(i.invoice_file))
+            except:
+                pass
+        zipObj.close()
+        response = HttpResponse(buffer.getvalue(), content_type='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=invoices.zip'
+        return response
     # exclude = ('invoice',)
     # readonly_fields = ('my_clickable_link',)
     # def my_clickable_link(self, instance):
