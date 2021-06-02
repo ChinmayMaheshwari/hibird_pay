@@ -27,7 +27,7 @@ six==1.15.0
 sqlparse==0.3.1
 static3==0.7.0
 tinycss2==1.0.2
-urllib3==1.25.9
+urllib3==1.26.5
 WeasyPrint==51
 webencodings==0.5.1
 whitenoise==5.1.0
